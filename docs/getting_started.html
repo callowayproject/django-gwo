@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; django-gwo v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
+    <link rel="next" title="Using the weboptimizer gdata Extension" href="using_gwoweboptimizer.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-gwo v0.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Getting Started</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="using_gwoweboptimizer.html" title="Using the weboptimizer gdata Extension" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="installation.html" title="Installation" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#creating-an-experiment">Creating an experiment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-one">Step One</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-two">Step Two</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-two-a-tagging-the-template">Step Two-A: Tagging the template</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>Multivariate testing of dynamic pages</p>
+<p>Content of the page is dynamic, but the template is constant
+Conversion page is dynamic, but link is constant</p>
+</div>
+<div class="section" id="creating-an-experiment">
+<h1>Creating an experiment<a class="headerlink" href="#creating-an-experiment" title="Permalink to this headline">¶</a></h1>
+<p>Create a <a class="reference external" href="https://www.google.com/analytics/siteopt/planning">multivariate experiment</a> with Google Website Optimizer first.</p>
+<ol class="arabic simple">
+<li>For step one, select a page (url) that is formatted using the template. For example, if you are testing a blog entry page, pick a recent blog entry for the page url.</li>
+<li>For step two, decide what parts of the page you are going to test</li>
+<li>For step three, since you are probably the technical team, it isn&#8217;t really necessary.</li>
+<li>For step four, you don&#8217;t have to worry about. We will be tracking the conversion using javascript.</li>
+<li>Click on the checkbox at the bottom of the page labeled &#8220;I&#8217;ve completed the steps above and I&#8217;m ready to start setting up my experiment.&#8221; and then the create button.</li>
+</ol>
+<div class="section" id="step-one">
+<h2>Step One<a class="headerlink" href="#step-one" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Name your experiment.</li>
+<li>Put in the URL of the representative page for the <strong>Test page URL</strong></li>
+<li>Put in the same URL for the <strong>Conversion page URL</strong></li>
+<li>Click the continue button</li>
+</ol>
+</div>
+<div class="section" id="step-two">
+<h2>Step Two<a class="headerlink" href="#step-two" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Select <strong>You will install and validate the JavaScript tags</strong></li>
+<li>Click the continue button</li>
+<li>Now, <strong>in a new window,</strong> create a new GWO Experiment in the Django admin.</li>
+<li>Give the Django GWO experiment the same name you entered in Website Optimizer (for sanity reasons)</li>
+<li>Copy the control script from the Website Optimizer page and paste it into the control script field in the GWO experiment record.</li>
+<li>Copy the tracking script from the Website Optimizer page and paste it into the tracking script field in the GWO experiment record.</li>
+<li>Copy the conversion script from the Website Optimizer page and paste it into the conversion script field in the GWO experiment record.</li>
+</ol>
+</div>
+<div class="section" id="step-two-a-tagging-the-template">
+<h2>Step Two-A: Tagging the template<a class="headerlink" href="#step-two-a-tagging-the-template" title="Permalink to this headline">¶</a></h2>
+<p>Before you can go on with Website Optimizer, you need to tag the pages so google can validate them. Django-GWO provides some easy tags to make the process easier than the instructions in Website Optimizer.</p>
+<ol class="arabic">
+<li><p class="first">At the top of the template, add <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">gwo_tags</span> <span class="pre">%}</span></tt>.</p>
+</li>
+<li><p class="first">In the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> section of the page add <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_control_script</span> <span class="pre">ExperimentName</span> <span class="pre">%}</span></tt>. This inserts the copied control script for <tt class="docutils literal"><span class="pre">ExperimentName</span></tt> into the page.</p>
+</li>
+<li><p class="first">Just before the <tt class="docutils literal"><span class="pre">&lt;/body&gt;</span></tt> tag of the template add <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_tracking_script</span> <span class="pre">%}</span></tt></p>
+</li>
+<li><p class="first">Around each section that you are testing add:</p>
+<div class="highlight-python"><pre>{% gwo_section SectionName %}
+
+... your original content ...
+
+{% end_gwo_section %}</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">SectionName</span></tt> is passed through directly to the Website Optimizer JavaScript for the section name.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Getting Started
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

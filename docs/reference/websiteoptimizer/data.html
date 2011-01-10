@@ -1,0 +1,595 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gwo.websiteoptimizer.data &mdash; django-gwo v0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="django-gwo v0.1 documentation" href="../../index.html" />
+    <link rel="up" title="websiteoptimizer" href="index.html" />
+    <link rel="prev" title="gwo.websiteoptimizer.client" href="client.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-gwo v0.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>gwo.websiteoptimizer.data</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="client.html" title="gwo.websiteoptimizer.client" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../../index.html">Main Page</a></li></ul>
+	<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html#creating-an-experiment">Creating an experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-gwo.websiteoptimizer.data">
+<span id="gwo-websiteoptimizer-data"></span><h1>gwo.websiteoptimizer.data<a class="headerlink" href="#module-gwo.websiteoptimizer.data" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.AnalyticsAccountId">
+<em class="property">class </em><tt class="descname">AnalyticsAccountId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.AnalyticsAccountId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the account ID that owns this experiment. 
+(read-only; may be set during experiment creation)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.AutoPruneMode">
+<em class="property">class </em><tt class="descname">AutoPruneMode</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.AutoPruneMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>the auto-prune setting for this experiment: None, Conservative, Normal or Aggressive.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.BaseGWOElement">
+<em class="property">class </em><tt class="descname">BaseGWOElement</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.BaseGWOElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class that sets the metaclass</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry">
+<em class="property">class </em><tt class="descname">CombinationEntry</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>A combination in the specified experiment</p>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry.combo_active">
+<tt class="descname">combo_active</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry.combo_active" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ComboActive" title="gwo.websiteoptimizer.data.ComboActive"><tt class="xref py py-class docutils literal"><span class="pre">ComboActive</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry.combo_id">
+<tt class="descname">combo_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry.combo_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ComboId" title="gwo.websiteoptimizer.data.ComboId"><tt class="xref py py-class docutils literal"><span class="pre">ComboId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry.combo_string">
+<tt class="descname">combo_string</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry.combo_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ComboString" title="gwo.websiteoptimizer.data.ComboString"><tt class="xref py py-class docutils literal"><span class="pre">ComboString</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry.experiment_id">
+<tt class="descname">experiment_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry.experiment_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentId" title="gwo.websiteoptimizer.data.ExperimentId"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.CombinationEntry.id">
+<tt class="descname">id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationEntry.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Id</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.CombinationFeed">
+<em class="property">class </em><tt class="descname">CombinationFeed</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.CombinationFeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all combinations in the specified experiment</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ComboActive">
+<em class="property">class </em><tt class="descname">ComboActive</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ComboActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>true if the combination is active; false if it has been pruned.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ComboId">
+<em class="property">class </em><tt class="descname">ComboId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ComboId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the id of this combination (0-based; read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ComboString">
+<em class="property">class </em><tt class="descname">ComboString</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ComboString" title="Permalink to this definition">¶</a></dt>
+<dd><p>the combination info string, which consists of a set of variation indices 
+for each section. For example, 0-1-1. (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ControlScript">
+<em class="property">class </em><tt class="descname">ControlScript</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ControlScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>the control script that should be placed at the top of any webpage in this experiment. 
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ConversionScript">
+<em class="property">class </em><tt class="descname">ConversionScript</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ConversionScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>the conversion script that should be called when a visitor converts.
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.Coverage">
+<em class="property">class </em><tt class="descname">Coverage</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.Coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>the percentage of total traffic to include in the experiment.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry">
+<em class="property">class </em><tt class="descname">ExperimentEntry</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment on Google Website Optimizer</p>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.analytics_account_id">
+<tt class="descname">analytics_account_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.analytics_account_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.AnalyticsAccountId" title="gwo.websiteoptimizer.data.AnalyticsAccountId"><tt class="xref py py-class docutils literal"><span class="pre">AnalyticsAccountId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.auto_prune_mode">
+<tt class="descname">auto_prune_mode</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.auto_prune_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.AutoPruneMode" title="gwo.websiteoptimizer.data.AutoPruneMode"><tt class="xref py py-class docutils literal"><span class="pre">AutoPruneMode</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.control_script">
+<tt class="descname">control_script</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.control_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ControlScript" title="gwo.websiteoptimizer.data.ControlScript"><tt class="xref py py-class docutils literal"><span class="pre">ControlScript</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.conversion_script">
+<tt class="descname">conversion_script</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.conversion_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ConversionScript" title="gwo.websiteoptimizer.data.ConversionScript"><tt class="xref py py-class docutils literal"><span class="pre">ConversionScript</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.coverage">
+<tt class="descname">coverage</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.Coverage" title="gwo.websiteoptimizer.data.Coverage"><tt class="xref py py-class docutils literal"><span class="pre">Coverage</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.experiment_id">
+<tt class="descname">experiment_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.experiment_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentId" title="gwo.websiteoptimizer.data.ExperimentId"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.experiment_notes">
+<tt class="descname">experiment_notes</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.experiment_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentNotes" title="gwo.websiteoptimizer.data.ExperimentNotes"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentNotes</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.experiment_type">
+<tt class="descname">experiment_type</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.experiment_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentType" title="gwo.websiteoptimizer.data.ExperimentType"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentType</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.id">
+<tt class="descname">id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Id</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.num_ab_page_variations">
+<tt class="descname">num_ab_page_variations</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.num_ab_page_variations" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.NumAbPageVariations" title="gwo.websiteoptimizer.data.NumAbPageVariations"><tt class="xref py py-class docutils literal"><span class="pre">NumAbPageVariations</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.num_combinations">
+<tt class="descname">num_combinations</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.num_combinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.NumCombinations" title="gwo.websiteoptimizer.data.NumCombinations"><tt class="xref py py-class docutils literal"><span class="pre">NumCombinations</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.num_sections">
+<tt class="descname">num_sections</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.num_sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.NumSections" title="gwo.websiteoptimizer.data.NumSections"><tt class="xref py py-class docutils literal"><span class="pre">NumSections</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.source_experiment_id">
+<tt class="descname">source_experiment_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.source_experiment_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.SourceExperimentId" title="gwo.websiteoptimizer.data.SourceExperimentId"><tt class="xref py py-class docutils literal"><span class="pre">SourceExperimentId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.status">
+<tt class="descname">status</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.Status" title="gwo.websiteoptimizer.data.Status"><tt class="xref py py-class docutils literal"><span class="pre">Status</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.title">
+<tt class="descname">title</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Title</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.tracking_script">
+<tt class="descname">tracking_script</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.tracking_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.TrackingScript" title="gwo.websiteoptimizer.data.TrackingScript"><tt class="xref py py-class docutils literal"><span class="pre">TrackingScript</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.update_goal_link">
+<tt class="descname">update_goal_link</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.update_goal_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function for changing the goalUrl</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> (<em>str</em>) &#8211; The new goal URL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.update_test_link">
+<tt class="descname">update_test_link</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.update_test_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method for changing the testUrl</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> (<em>str</em>) &#8211; The new testing URL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.verification_combo">
+<tt class="descname">verification_combo</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.verification_combo" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.VerificationCombo" title="gwo.websiteoptimizer.data.VerificationCombo"><tt class="xref py py-class docutils literal"><span class="pre">VerificationCombo</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.ExperimentEntry.verification_combo_coverage">
+<tt class="descname">verification_combo_coverage</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentEntry.verification_combo_coverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.VerificationComboCoverage" title="gwo.websiteoptimizer.data.VerificationComboCoverage"><tt class="xref py py-class docutils literal"><span class="pre">VerificationComboCoverage</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ExperimentFeed">
+<em class="property">class </em><tt class="descname">ExperimentFeed</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentFeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Web Optimizer Experiments Feed &lt;feed&gt;</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ExperimentId">
+<em class="property">class </em><tt class="descname">ExperimentId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the experiment ID for this experiment (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ExperimentNotes">
+<em class="property">class </em><tt class="descname">ExperimentNotes</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>user-created notes field. Limited to 2000 characters.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.ExperimentType">
+<em class="property">class </em><tt class="descname">ExperimentType</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.ExperimentType" title="Permalink to this definition">¶</a></dt>
+<dd><p>the experiment type: AB or Multivariate. 
+(read-only; may be set during experiment creation)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.GWOElementClass">
+<em class="property">class </em><tt class="descname">GWOElementClass</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.GWOElementClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>A metaclass that sets the _qname attribute based on the class name</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.GwoLink">
+<em class="property">class </em><tt class="descname">GwoLink</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>A link with the gwo namespace</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.GwoLinkFinder">
+<em class="property">class </em><tt class="descname">GwoLinkFinder</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLinkFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locates the various links within the ExperimentsEntry</p>
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.GwoLinkFinder.get_configuration_url">
+<tt class="descname">get_configuration_url</tt><big>(</big><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLinkFinder.get_configuration_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>the link to the configuration page for the experiment. (read-only)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.GwoLinkFinder.get_goal_link">
+<tt class="descname">get_goal_link</tt><big>(</big><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLinkFinder.get_goal_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>the goal page url (as entered by user) for display in Website Optimizer UI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.GwoLinkFinder.get_report_url">
+<tt class="descname">get_report_url</tt><big>(</big><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLinkFinder.get_report_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>the link to the report page for the experiment. (read-only)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.data.GwoLinkFinder.get_test_link">
+<tt class="descname">get_test_link</tt><big>(</big><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.GwoLinkFinder.get_test_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>the test page URL (as entered by the user) for display in Website Optimizer UI.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.NumAbPageVariations">
+<em class="property">class </em><tt class="descname">NumAbPageVariations</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.NumAbPageVariations" title="Permalink to this definition">¶</a></dt>
+<dd><p>the number of page variations in this experiment (A/B experiments only). 
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.NumCombinations">
+<em class="property">class </em><tt class="descname">NumCombinations</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.NumCombinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>the number of combinations in the experiment. 
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.NumSections">
+<em class="property">class </em><tt class="descname">NumSections</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.NumSections" title="Permalink to this definition">¶</a></dt>
+<dd><p>the number of sections in the experiment (multivariate experiments only). 
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.NumVariations">
+<em class="property">class </em><tt class="descname">NumVariations</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.NumVariations" title="Permalink to this definition">¶</a></dt>
+<dd><p>the number of variations for this section. (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SectionBeginScript">
+<em class="property">class </em><tt class="descname">SectionBeginScript</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionBeginScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>the script snippet to place before this section. (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SectionEndScript">
+<em class="property">class </em><tt class="descname">SectionEndScript</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEndScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>the script snippet to place after this section (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SectionEntry">
+<em class="property">class </em><tt class="descname">SectionEntry</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.experiment_id">
+<tt class="descname">experiment_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.experiment_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentId" title="gwo.websiteoptimizer.data.ExperimentId"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.id">
+<tt class="descname">id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Id</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.num_variations">
+<tt class="descname">num_variations</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.num_variations" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.NumVariations" title="gwo.websiteoptimizer.data.NumVariations"><tt class="xref py py-class docutils literal"><span class="pre">NumVariations</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.section_begin_script">
+<tt class="descname">section_begin_script</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.section_begin_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.SectionBeginScript" title="gwo.websiteoptimizer.data.SectionBeginScript"><tt class="xref py py-class docutils literal"><span class="pre">SectionBeginScript</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.section_end_script">
+<tt class="descname">section_end_script</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.section_end_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.SectionEndScript" title="gwo.websiteoptimizer.data.SectionEndScript"><tt class="xref py py-class docutils literal"><span class="pre">SectionEndScript</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.section_id">
+<tt class="descname">section_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.section_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.SectionId" title="gwo.websiteoptimizer.data.SectionId"><tt class="xref py py-class docutils literal"><span class="pre">SectionId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.SectionEntry.title">
+<tt class="descname">title</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionEntry.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Title</span></tt></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SectionFeed">
+<em class="property">class </em><tt class="descname">SectionFeed</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionFeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>All of the sections for a multivariate experiment</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SectionId">
+<em class="property">class </em><tt class="descname">SectionId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SectionId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the id for this section (0-based). (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.SourceExperimentId">
+<em class="property">class </em><tt class="descname">SourceExperimentId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.SourceExperimentId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the experiment ID of which this experiment is a copy or follow-up. 
+(read-only; may be set during experiment creation)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.Status">
+<em class="property">class </em><tt class="descname">Status</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>the current status of the experiment: New, Running, Paused, or Finished.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.TrackingScript">
+<em class="property">class </em><tt class="descname">TrackingScript</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.TrackingScript" title="Permalink to this definition">¶</a></dt>
+<dd><p>the tracking script that should be placed at the bottom of any webpage in this experiment. 
+(read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.VariationEntry">
+<em class="property">class </em><tt class="descname">VariationEntry</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>A variation for a specific section of a specific experiment</p>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.VariationEntry.content">
+<tt class="descname">content</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Content</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.VariationEntry.experiment_id">
+<tt class="descname">experiment_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry.experiment_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.ExperimentId" title="gwo.websiteoptimizer.data.ExperimentId"><tt class="xref py py-class docutils literal"><span class="pre">ExperimentId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.VariationEntry.id">
+<tt class="descname">id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Id</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.VariationEntry.section_id">
+<tt class="descname">section_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry.section_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.SectionId" title="gwo.websiteoptimizer.data.SectionId"><tt class="xref py py-class docutils literal"><span class="pre">SectionId</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.data.VariationEntry.variation_id">
+<tt class="descname">variation_id</tt><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationEntry.variation_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#gwo.websiteoptimizer.data.VariationId" title="gwo.websiteoptimizer.data.VariationId"><tt class="xref py py-class docutils literal"><span class="pre">VariationId</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.VariationFeed">
+<em class="property">class </em><tt class="descname">VariationFeed</tt><big>(</big><em>atom_id=None</em>, <em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationFeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the variations for a specific section of a specific experiment</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.VariationId">
+<em class="property">class </em><tt class="descname">VariationId</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.VariationId" title="Permalink to this definition">¶</a></dt>
+<dd><p>the id for this variation (0-based). (read-only)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.VerificationCombo">
+<em class="property">class </em><tt class="descname">VerificationCombo</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.VerificationCombo" title="Permalink to this definition">¶</a></dt>
+<dd><p>for follow-up experiments, the combination being verified against the original. 
+(read-only; may be set during experiment creation)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.data.VerificationComboCoverage">
+<em class="property">class </em><tt class="descname">VerificationComboCoverage</tt><big>(</big><em>text=None</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.data.VerificationComboCoverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>for follow-up experiments, the percentage of traffic to send to the verification combo. 
+(read-only, may be set during experiment creation)</p>
+</dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="../index.html" accesskey="U">Reference</a><img src="../../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		<a href="index.html" >websiteoptimizer</a><img src="../../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		gwo.websiteoptimizer.data
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../../_static/toc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,420 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using the weboptimizer gdata Extension &mdash; django-gwo v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
+    <link rel="next" title="Reference" href="reference/index.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-gwo v0.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Using the weboptimizer gdata Extension</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="reference/index.html" title="Reference" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="getting_started.html" title="Getting Started" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html#creating-an-experiment">Creating an experiment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Using the weboptimizer gdata Extension</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-experiment-tasks">General Experiment Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-b-experiments">A/B Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multivariate-experiments">Multivariate Experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-the-weboptimizer-gdata-extension">
+<h1>Using the weboptimizer gdata Extension<a class="headerlink" href="#using-the-weboptimizer-gdata-extension" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-experiment-tasks">
+<h2>General Experiment Tasks<a class="headerlink" href="#general-experiment-tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-list-of-experiments">
+<h3>Get list of experiments<a class="headerlink" href="#get-list-of-experiments" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp_feed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiments</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">exp</span></tt> is now a <tt class="xref py py-class docutils literal"><span class="pre">ExperimentFeed</span></tt> instance. Each <tt class="xref py py-class docutils literal"><span class="pre">ExperimentEntry</span></tt> is found in the <tt class="xref py py-attr docutils literal"><span class="pre">ExperimentFeed.entry</span></tt> attribute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">exp_feed</span><span class="o">.</span><span class="n">entry</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">exp</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each of the experiments in the feed are summary instances only, meaning they don&#8217;t have detailed information. For more detailed information, you need to request a specific experiment.</p>
+</div>
+<div class="section" id="get-detailed-info-about-an-experiment">
+<h3>Get detailed info about an experiment<a class="headerlink" href="#get-detailed-info-about-an-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Alternatively, if you have already queried a list of experiments you can use the <tt class="docutils literal"><span class="pre">href</span></tt> property of the <tt class="docutils literal"><span class="pre">get_self_link()</span></tt> method of the entry:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp_feed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiments</span><span class="p">()</span>
+<span class="n">exp1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">exp_feed</span><span class="o">.</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_self_link</span><span class="p">()</span><span class="o">.</span><span class="n">href</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or you can create an <tt class="xref py py-class docutils literal"><span class="pre">ExperimentQuery</span></tt> using the <tt class="docutils literal"><span class="pre">text</span></tt> property of the <tt class="docutils literal"><span class="pre">experiment_id</span></tt> property:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp_feed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiments</span><span class="p">()</span>
+<span class="n">ex1</span> <span class="o">=</span> <span class="n">exp_feed</span><span class="o">.</span><span class="n">entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">exp1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="n">ex1</span><span class="o">.</span><span class="n">experiment_id</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-an-experiment">
+<h3>Update an experiment<a class="headerlink" href="#update-an-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Updating an experiment is easy as long as you remember that all the attributes are actually XML tags. Typically you have to update the <tt class="docutils literal"><span class="pre">text</span></tt> attribute.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>force=True</strong> is the only way I&#8217;ve been able to get the REST API to actually update the experiment.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">exp</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&#39;Test Exp 1&#39;</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The test URL and goal URL attributes aren&#8217;t easy to update, so there are two methods to make it easy: <tt class="xref py py-meth docutils literal"><span class="pre">ExperimentEntry.update_test_link()</span></tt> and <tt class="xref py py-meth docutils literal"><span class="pre">ExperimentEntry.update_goal_link()</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">exp</span><span class="o">.</span><span class="n">update_goal_link</span><span class="p">(</span><span class="s">&#39;http://www.example.com/new/goal/&#39;</span><span class="p">)</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-an-experiment">
+<h3>Delete an experiment<a class="headerlink" href="#delete-an-experiment" title="Permalink to this headline">¶</a></h3>
+<p>You delete experiments by passing either a URI (<tt class="xref py py-class docutils literal"><span class="pre">ExperimentQuery</span></tt>) or an <tt class="xref py py-class docutils literal"><span class="pre">ExperimentEntry</span></tt> instance to the <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.delete()</span></tt> method.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The response is a <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPResponse</span></tt> instance. <tt class="xref py py-attr docutils literal"><span class="pre">httplib.HTTPResponse.status</span></tt> should be 200 if everything was successful.</p>
+</div>
+<div class="section" id="copy-an-experiment">
+<h3>Copy an experiment<a class="headerlink" href="#copy-an-experiment" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+<div class="section" id="view-all-combinations-in-an-experiment">
+<h3>View all combinations in an experiment<a class="headerlink" href="#view-all-combinations-in-an-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">combo_feed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_combinations</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">CombinationQuery</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">combo_feed</span></tt> is a <tt class="xref py py-class docutils literal"><span class="pre">CombinationFeed</span></tt> instance. All combinations are found in the <tt class="xref py py-attr docutils literal"><span class="pre">CombinationFeed.entry</span></tt> attribute.</p>
+</div>
+<div class="section" id="view-a-single-combination-in-an-experiment">
+<h3>View a single combination in an experiment<a class="headerlink" href="#view-a-single-combination-in-an-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">combo</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_combination</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">CombinationQuery</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="launch-a-follow-up-experiment">
+<h3>Launch a follow-up experiment<a class="headerlink" href="#launch-a-follow-up-experiment" title="Permalink to this headline">¶</a></h3>
+<p>TODO</p>
+</div>
+</div>
+<div class="section" id="a-b-experiments">
+<h2>A/B Experiments<a class="headerlink" href="#a-b-experiments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-new-a-b-experiment">
+<h3>Create a new A/B experiment<a class="headerlink" href="#create-a-new-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_experiment</span><span class="p">(</span>
+    <span class="n">exp_type</span><span class="o">=</span><span class="s">&#39;AB&#39;</span><span class="p">,</span>
+    <span class="n">analytics_acct</span><span class="o">=</span><span class="s">&#39;1234567&#39;</span><span class="p">,</span>
+    <span class="n">test_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/test/url/&#39;</span><span class="p">,</span>
+    <span class="n">goal_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/goal/url/&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s">&#39;Test Exp 2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">exp</span></tt> is now a <tt class="xref py py-class docutils literal"><span class="pre">ExperimentEntry</span></tt> instance as returned from Google. If there is an problem, <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.add_experiment()</span></tt> raises a <tt class="xref py py-exc docutils literal"><span class="pre">gdata.client.RequestError</span></tt> exception.</p>
+</div>
+<div class="section" id="add-a-new-page-variation-to-an-a-b-experiment">
+<h3>Add a new page variation to an A/B experiment<a class="headerlink" href="#add-a-new-page-variation-to-an-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="view-a-single-page-variation-in-an-a-b-experiment">
+<h3>View a single page variation in an A/B experiment<a class="headerlink" href="#view-a-single-page-variation-in-an-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="view-all-page-variations-in-an-a-b-experiment">
+<h3>View all page variations in an A/B experiment<a class="headerlink" href="#view-all-page-variations-in-an-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="update-a-page-variation-in-an-a-b-experiment">
+<h3>Update a page variation in an A/B experiment<a class="headerlink" href="#update-a-page-variation-in-an-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="delete-a-page-variation-from-an-a-b-experiment">
+<h3>Delete a page variation from an A/B experiment<a class="headerlink" href="#delete-a-page-variation-from-an-a-b-experiment" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="multivariate-experiments">
+<h2>Multivariate Experiments<a class="headerlink" href="#multivariate-experiments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-new-multivariate-experiment">
+<h3>Create a new multivariate experiment<a class="headerlink" href="#create-a-new-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_experiment</span><span class="p">(</span>
+    <span class="n">exp_type</span><span class="o">=</span><span class="s">&#39;Multivariate&#39;</span><span class="p">,</span>
+    <span class="n">analytics_acct</span><span class="o">=</span><span class="s">&#39;1234567&#39;</span><span class="p">,</span>
+    <span class="n">test_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/test/url/&#39;</span><span class="p">,</span>
+    <span class="n">goal_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/goal/url/&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s">&#39;Test Exp 2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">exp</span></tt> is now a <tt class="xref py py-class docutils literal"><span class="pre">ExperimentEntry</span></tt> instance as returned from Google. If there is an problem, <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.add_experiment()</span></tt> raises a <tt class="xref py py-exc docutils literal"><span class="pre">gdata.client.RequestError</span></tt> exception.</p>
+</div>
+<div class="section" id="view-all-sections-in-a-multivariate-experiment">
+<h3>View all sections in a multivariate experiment<a class="headerlink" href="#view-all-sections-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">sections</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_sections</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="n">experiment</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">sections</span></tt> is a <tt class="xref py py-class docutils literal"><span class="pre">SectionFeed</span></tt> instance. Individual sections are in the <tt class="xref py py-attr docutils literal"><span class="pre">SectionFeed.entry</span></tt> attribute.</p>
+</div>
+<div class="section" id="view-a-single-section-in-a-multivariate-experiment">
+<h3>View a single section in a multivariate experiment<a class="headerlink" href="#view-a-single-section-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Sections are numbered starting at 0. There will be <tt class="xref py py-attr docutils literal"><span class="pre">ExperimentEntry.num_sections.text</span></tt> sections within the experiment.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-new-section-to-a-multivariate-experiment">
+<h3>Add a new section to a multivariate experiment<a class="headerlink" href="#add-a-new-section-to-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_experiment</span><span class="p">(</span>
+    <span class="n">exp_type</span><span class="o">=</span><span class="s">&#39;Multivariate&#39;</span><span class="p">,</span>
+    <span class="n">analytics_acct</span><span class="o">=</span><span class="s">&#39;1234567&#39;</span><span class="p">,</span>
+    <span class="n">test_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/test/url/&#39;</span><span class="p">,</span>
+    <span class="n">goal_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/goal/url/&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s">&#39;Test Exp 2&#39;</span><span class="p">)</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;section1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">section</span></tt> is now a <tt class="xref py py-class docutils literal"><span class="pre">SectionEntry</span></tt> instance. If there is an problem, <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.add_section()</span></tt> raises a <tt class="xref py py-exc docutils literal"><span class="pre">gdata.client.RequestError</span></tt> exception.</p>
+</div>
+<div class="section" id="update-a-section-in-a-multivariate-experiment">
+<h3>Update a section in a multivariate experiment<a class="headerlink" href="#update-a-section-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Updating a section is easy as long as you remember that all the attributes are actually XML tags. Typically you have to update the <tt class="docutils literal"><span class="pre">text</span></tt> attribute.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>force=True</strong> is the only way I&#8217;ve been able to get the REST API to actually update the section.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">))</span>
+<span class="n">section</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&#39;Inner Column&#39;</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-a-section-from-a-multivariate-experiment">
+<h3>Delete a section from a multivariate experiment<a class="headerlink" href="#delete-a-section-from-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>You delete sections by passing either a URI (<tt class="xref py py-class docutils literal"><span class="pre">SectionQuery</span></tt>) or an <tt class="xref py py-class docutils literal"><span class="pre">SectionEntry</span></tt> instance to the <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.delete()</span></tt> method.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The response is a <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPResponse</span></tt> instance. <tt class="xref py py-attr docutils literal"><span class="pre">httplib.HTTPResponse.status</span></tt> should be 200 if everything was successful.</p>
+</div>
+<div class="section" id="view-all-variations-within-a-section-of-a-multivariate-experiment">
+<h3>View all variations within a section of a multivariate experiment<a class="headerlink" href="#view-all-variations-within-a-section-of-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>You query variations either with an experiment id and section id or with a <tt class="xref py py-class docutils literal"><span class="pre">SectionEntry</span></tt> object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">variations</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_variations</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">variations</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_variations</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">variations</span></tt> is a <tt class="xref py py-class docutils literal"><span class="pre">VariationFeed</span></tt> instance. Individual variations are in the <tt class="xref py py-attr docutils literal"><span class="pre">VariationFeed.entry</span></tt> attribute.</p>
+</div>
+<div class="section" id="view-a-single-variation-within-a-section-of-a-multivariate-experiment">
+<h3>View a single variation within a section of a multivariate experiment<a class="headerlink" href="#view-a-single-variation-within-a-section-of-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>You can query a specific variation either with an experiment id, section id and variation id or with a <tt class="xref py py-class docutils literal"><span class="pre">SectionEntry</span></tt> object and variation id. Variation ids are 0-based and there are <tt class="xref py py-attr docutils literal"><span class="pre">SectionEntry.num_variations.text</span></tt> variations in the section.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">variations</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_variations</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_experiment</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">ExperimentQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_section</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">SectionQuery</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">variations</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_variations</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-new-variation-to-a-section-in-a-multivariate-experiment">
+<h3>Add a new variation to a section in a multivariate experiment<a class="headerlink" href="#add-a-new-variation-to-a-section-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Add a variation using a <tt class="xref py py-class docutils literal"><span class="pre">SectionEntry</span></tt> or <tt class="xref py py-class docutils literal"><span class="pre">SectionQuery</span></tt> object with a title and content for the variation.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_experiment</span><span class="p">(</span>
+    <span class="n">exp_type</span><span class="o">=</span><span class="s">&#39;Multivariate&#39;</span><span class="p">,</span>
+    <span class="n">analytics_acct</span><span class="o">=</span><span class="s">&#39;1234567&#39;</span><span class="p">,</span>
+    <span class="n">test_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/test/url/&#39;</span><span class="p">,</span>
+    <span class="n">goal_url</span><span class="o">=</span><span class="s">&#39;http://www.example.com/goal/url/&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s">&#39;Test Exp 2&#39;</span><span class="p">)</span>
+<span class="n">section</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="n">experiment</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;section1&#39;</span><span class="p">)</span>
+<span class="n">orig_content</span> <span class="o">=</span> <span class="s">&#39;&lt;img src=&quot;cool.jpg&quot; /&gt;&#39;</span>
+<span class="n">var_content</span> <span class="o">=</span> <span class="s">&#39;&lt;img src=&quot;cooler.jpg&quot; /&gt;&#39;</span>
+<span class="n">var1</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_variation</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;Original&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">orig_content</span><span class="p">)</span>
+<span class="n">var2</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">add_variation</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;Cooler&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">var_content</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">var1</span></tt> and <tt class="docutils literal"><span class="pre">var2</span></tt> are now a <tt class="xref py py-class docutils literal"><span class="pre">VariationEntry</span></tt> instances. If there is an problem, <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.add_variation()</span></tt> raises a <tt class="xref py py-exc docutils literal"><span class="pre">gdata.client.RequestError</span></tt> exception.</p>
+</div>
+<div class="section" id="update-a-variation-in-a-section-in-a-multivariate-experiment">
+<h3>Update a variation in a section in a multivariate experiment<a class="headerlink" href="#update-a-variation-in-a-section-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Updating a variation is easy as long as you remember that all the attributes are actually XML tags. Typically you have to update the <tt class="docutils literal"><span class="pre">text</span></tt> attribute.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>force=True</strong> is the only way I&#8217;ve been able to get the REST API to actually update the variation.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">get_variation</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">VariationQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">))</span>
+<span class="n">var</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s">&#39;&lt;img src=&quot;evencooler.jpg&quot; /&gt;&#39;</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-a-variation-from-a-section-in-a-multivariate-experiment">
+<h3>Delete a variation from a section in a multivariate experiment<a class="headerlink" href="#delete-a-variation-from-a-section-in-a-multivariate-experiment" title="Permalink to this headline">¶</a></h3>
+<p>You delete variations by passing either a URI (<tt class="xref py py-class docutils literal"><span class="pre">VariationQuery</span></tt>) or an <tt class="xref py py-class docutils literal"><span class="pre">VariationEntry</span></tt> instance to the <tt class="xref py py-meth docutils literal"><span class="pre">WebsiteOptimizerClient.delete()</span></tt> method.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gwo.websiteoptimizer</span> <span class="kn">import</span> <span class="n">client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">WebsiteOptimizerClient</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">ClientLogin</span><span class="p">(</span><span class="s">&#39;yourlogin&#39;</span><span class="p">,</span><span class="s">&#39;yourpass&#39;</span><span class="p">,</span><span class="s">&#39;django-gwo&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">VariationQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The response is a <tt class="xref py py-class docutils literal"><span class="pre">httplib.HTTPResponse</span></tt> instance. <tt class="xref py py-attr docutils literal"><span class="pre">httplib.HTTPResponse.status</span></tt> should be 200 if everything was successful.</p>
+</div>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Using the weboptimizer gdata Extension
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

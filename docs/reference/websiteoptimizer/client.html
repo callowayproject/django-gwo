@@ -1,0 +1,456 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gwo.websiteoptimizer.client &mdash; django-gwo v0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="django-gwo v0.1 documentation" href="../../index.html" />
+    <link rel="up" title="websiteoptimizer" href="index.html" />
+    <link rel="next" title="gwo.websiteoptimizer.data" href="data.html" />
+    <link rel="prev" title="websiteoptimizer" href="index.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-gwo v0.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>gwo.websiteoptimizer.client</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="../../genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="../../py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="data.html" title="gwo.websiteoptimizer.data" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="index.html" title="websiteoptimizer" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="../../index.html">Main Page</a></li></ul>
+	<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html#creating-an-experiment">Creating an experiment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="../../search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-gwo.websiteoptimizer.client">
+<span id="gwo-websiteoptimizer-client"></span><h1>gwo.websiteoptimizer.client<a class="headerlink" href="#module-gwo.websiteoptimizer.client" title="Permalink to this headline">¶</a></h1>
+<p>Ways of accessing the Google Website Optimizer API</p>
+<dl class="class">
+<dt id="gwo.websiteoptimizer.client.CombinationQuery">
+<em class="property">class </em><tt class="descname">CombinationQuery</tt><big>(</big><em>experiment</em>, <em>combination_id=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.CombinationQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query all combinations or a specific combination of a multivariate experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>experiment</strong> (<em>int, str, unicode or ExperimentEntry</em>) &#8211; The experiment</li>
+<li><strong>combination_id</strong> (<em>int, str, or unicode</em>) &#8211; The optional id of a specific combination</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.client.CombinationQuery.path">
+<tt class="descname">path</tt><a class="headerlink" href="#gwo.websiteoptimizer.client.CombinationQuery.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path section of the URI to this query</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.client.ExperimentQuery">
+<em class="property">class </em><tt class="descname">ExperimentQuery</tt><big>(</big><em>exp_id=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.ExperimentQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query all experiments or a specific experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>exp_id</strong> (None, int, str, unicode. <strong>Default:</strong> <tt class="xref docutils literal"><span class="pre">None</span></tt>) &#8211; The experiment id, if a specific experiment is requested.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.client.ExperimentQuery.path">
+<tt class="descname">path</tt><a class="headerlink" href="#gwo.websiteoptimizer.client.ExperimentQuery.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path section of the URI to this query</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.client.SectionQuery">
+<em class="property">class </em><tt class="descname">SectionQuery</tt><big>(</big><em>experiment</em>, <em>section_id=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.SectionQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query all sections or a specific section of an experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>experiment</strong> (int, str, unicode or <tt class="docutils literal"><span class="pre">ExperimentEntry</span></tt>) &#8211; The experiment.</li>
+<li><strong>section_id</strong> (<em>int, str, or unicode</em>) &#8211; The optional, 0-based id of a specific section.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.client.SectionQuery.path">
+<tt class="descname">path</tt><a class="headerlink" href="#gwo.websiteoptimizer.client.SectionQuery.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path section of the URI to this query</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.client.VariationQuery">
+<em class="property">class </em><tt class="descname">VariationQuery</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.VariationQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query all variations or a specific variation of a section of an experiment</p>
+<p>In order to be flexible with the parameters, you can query variations with:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">experiment_id</span></tt> and <tt class="docutils literal"><span class="pre">section_id</span></tt> and optionally <tt class="docutils literal"><span class="pre">variation_id</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">section=SectionEntry</span></tt> and optionally <tt class="docutils literal"><span class="pre">variation_id</span></tt></li>
+</ul>
+<p>All variations of section 1 of experiment 12345:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">VariationQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="n">section_id</span><span class="o">=</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">section1</span><span class="p">)</span> <span class="c"># Assuming section1 is a SectionEntry instance</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">section1</span><span class="p">)</span> <span class="c"># Assuming section1 is a SectionEntry instance</span>
+</pre></div>
+</div>
+<p>Variation 0 of section 1 of experiment 12345:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">VariationQuery</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">experiment_id</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">,</span> <span class="n">section_id</span><span class="o">=</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="n">variation_id</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">)</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">section1</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">)</span> <span class="c"># Assuming section1 is a SectionEntry instance</span>
+<span class="n">VariationQuery</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">section1</span><span class="p">,</span> <span class="n">variation</span><span class="o">=</span><span class="s">&#39;0&#39;</span><span class="p">)</span> <span class="c"># Assuming section1 is a SectionEntry instance</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="gwo.websiteoptimizer.client.VariationQuery.path">
+<tt class="descname">path</tt><a class="headerlink" href="#gwo.websiteoptimizer.client.VariationQuery.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path section of the URI to this query</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient">
+<em class="property">class </em><tt class="descname">WebsiteOptimizerClient</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client extension for the Google Website Optimizer API service.</p>
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_experiment">
+<tt class="descname">add_experiment</tt><big>(</big><em>exp_type</em>, <em>analytics_acct</em>, <em>test_url</em>, <em>goal_url</em>, <em>title</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new experiment</p>
+<p>On failure, a RequestError is raised of the form:</p>
+<div class="highlight-python"><pre>{'status': HTTP status code from server, 
+'reason': HTTP reason from the server, 
+'body': HTTP body of the server's response}</pre>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exp_type</strong> (<em>str</em>) &#8211; &#8216;AB&#8217; or &#8216;Multivariate&#8217;</li>
+<li><strong>analytics_acct</strong> (<em>str</em>) &#8211; The Google Analytics account to use</li>
+<li><strong>test_url</strong> (<em>str</em>) &#8211; The test page URL</li>
+<li><strong>goal_url</strong> (<em>str</em>) &#8211; The goal page URL</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; The name of the experiment</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ExperimentEntry</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">RequestError</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_section">
+<tt class="descname">add_section</tt><big>(</big><em>experiment</em>, <em>title</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a section to an experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>experiment</strong> (<em>int, str, unicode or ExperimentEntry</em>) &#8211; The experiment which to add the section</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; The name of the section</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_variation">
+<tt class="descname">add_variation</tt><big>(</big><em>section</em>, <em>title</em>, <em>content</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.add_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a variation to an experiment section.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>section</strong> (<em>SectionEntry or SectionQuery</em>) &#8211; The section which to add the variation</li>
+<li><strong>title</strong> (<em>str</em>) &#8211; The name of the variation</li>
+<li><strong>content</strong> (<em>str</em>) &#8211; The content of the variation (what goes on the page)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.delete">
+<tt class="descname">delete</tt><big>(</big><em>entry_or_uri</em>, <em>auth_token=None</em>, <em>force=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the item specified by entry_or_uri.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>entry_or_uri</strong> &#8211; Either an Entry or Query object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_combination">
+<tt class="descname">get_combination</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_combination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about a single combination within an experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>CombinationQuery</em>) &#8211; The CombinationQuery to specify the combination</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">CombinationEntry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_combinations">
+<tt class="descname">get_combinations</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_combinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all combinations in the specified experiment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>CombinationQuery</em>) &#8211; The CombinationQuery to get all the combinations</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">CombinationFeed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_experiment">
+<tt class="descname">get_experiment</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>ExperimentQuery</em>) &#8211; The REST URI to get the feeds</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">ExperimentEntry</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_experiments">
+<tt class="descname">get_experiments</tt><big>(</big><em>feed_uri=None</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_experiments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the experiments the current user has access to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>None, ExperimentQuery</em>) &#8211; The REST URI to get the feeds. Defaults to all experiments</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">ExperimentFeed</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_section">
+<tt class="descname">get_section</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a section for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>SectionQuery</em>) &#8211; The SectionQuery from which to get the SectionEntry</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">SectionEntry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_sections">
+<tt class="descname">get_sections</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a section feed for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>SectionQuery</em>) &#8211; The SectionQuery from which to get the feed</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">SectionFeed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_variation">
+<tt class="descname">get_variation</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a variation for an experiment section.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>VariationQuery</em>) &#8211; The VariationQuery from which to get the VariationEntry</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">VariationEntry</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_variations">
+<tt class="descname">get_variations</tt><big>(</big><em>feed_uri</em>, <em>auth_token=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.get_variations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a variation feed for an experiment section.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>feed_uri</strong> (<em>VariationQuery</em>) &#8211; The VariationQuery from which to get the VariationFeed</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">VariationFeed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="gwo.websiteoptimizer.client.WebsiteOptimizerClient.update">
+<tt class="descname">update</tt><big>(</big><em>entry</em>, <em>auth_token=None</em>, <em>force=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#gwo.websiteoptimizer.client.WebsiteOptimizerClient.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edits the entry on the server by sending the XML for this entry.</p>
+<p>Performs a PUT and converts the response to a new entry object with a
+matching class to the entry passed in.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>entry</strong> &#8211; The Atom Entry object.</li>
+<li><strong>auth_token</strong> &#8211; Optional authentication token</li>
+<li><strong>force</strong> (<em>boolean</em>) &#8211; <p>Whether an update should be forced. <strong>Default:</strong>
+False.</p>
+<p>Normally, if a change has been made since the passed in
+entry was obtained, the server will not overwrite the entry since
+the changes were based on an obsolete version of the entry.
+Setting force to True will cause the update to silently
+overwrite whatever version is present.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A new Entry object of a matching type to the entry which was passed in.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		<a href="../index.html" accesskey="U">Reference</a><img src="../../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		<a href="index.html" >websiteoptimizer</a><img src="../../_static/triangle_closed.png" height="9" width="9" alt="&gt;">
+		gwo.websiteoptimizer.client
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="../../_static/toc.js"></script>
+  </body>
+</html>
