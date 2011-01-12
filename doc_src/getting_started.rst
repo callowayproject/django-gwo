@@ -1,58 +1,38 @@
-
+===============
 Getting Started
 ===============
 
-Multivariate testing of dynamic pages
-
-Content of the page is dynamic, but the template is constant
-Conversion page is dynamic, but link is constant
 
 Creating an experiment
 ======================
 
-Create a `multivariate experiment <https://www.google.com/analytics/siteopt/planning>`_ with Google Website Optimizer first. 
+#. Create a new Experiment in the Django admin.
 
-#. For step one, select a page (url) that is formatted using the template. For example, if you are testing a blog entry page, pick a recent blog entry for the page url.
+#. Name your experiment in the **Title** field.
 
-#. For step two, decide what parts of the page you are going to test
+#. Set 'Multivariate' as the **Experiment type**.
 
-#. For step three, since you are probably the technical team, it isn't really necessary.
-
-#. For step four, you don't have to worry about. We will be tracking the conversion using javascript.
-
-#. Click on the checkbox at the bottom of the page labeled "I've completed the steps above and I'm ready to start setting up my experiment." and then the create button.
-
-Step One
-********
-
-#. Name your experiment.
-
-#. Put in the URL of the representative page for the **Test page URL**
+#. Put in the URL of the representative page for the **Test page URL**. For example, if you are testing a blog entry page, pick a recent blog entry for the page url.
 
 #. Put in the same URL for the **Conversion page URL**
 
-#. Click the continue button
+#. Leave **Auto prune mode** at None, unless you really know what you're doing.
+
+#. Save the experiment.
 
 
-Step Two
-********
+Create a section for an experiment
+==================================
 
-#. Select **You will install and validate the JavaScript tags**
+#. Each listing of experiments includes a field detailing how many sections are currently defined for that experiment and links to view the sections or add a section. Click on **Add section**.
 
-#. Click the continue button
+#. The **Experiment** field will already be set, so simply enter in the **Title** for this section.
 
-#. Now, **in a new window,** create a new GWO Experiment in the Django admin.
+#. Clicking on **Save** will save this section and take you to the list of all sections. Clicking on **Save and add another** will save this section and create a new section, but the **Experiment** will not be pre-filled.
 
-#. Give the Django GWO experiment the same name you entered in Website Optimizer (for sanity reasons)
 
-#. Copy the control script from the Website Optimizer page and paste it into the control script field in the GWO experiment record.
-
-#. Copy the tracking script from the Website Optimizer page and paste it into the tracking script field in the GWO experiment record.
-
-#. Copy the conversion script from the Website Optimizer page and paste it into the conversion script field in the GWO experiment record.
-
-Step Two-A: Tagging the template
-********************************
+Tagging the template
+====================
 
 Before you can go on with Website Optimizer, you need to tag the pages so google can validate them. Django-GWO provides some easy tags to make the process easier than the instructions in Website Optimizer.
 
