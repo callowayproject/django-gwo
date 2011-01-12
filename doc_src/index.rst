@@ -8,6 +8,7 @@ Contents:
    :glob:
    
    installation
+   overview
    getting_started
    using_gwoweboptimizer
    reference/index
