@@ -9,7 +9,7 @@ GWO_USER = getattr(settings, 'GWO_USER', None)
 if GWO_USER is None:
     raise ImproperlyConfigured("Django-GWO is missing the GWO_USER setting.")
 
-GWO_USER = getattr(settings, 'GWO_PASSWORD', None)
+GWO_PASSWORD = getattr(settings, 'GWO_PASSWORD', None)
 if GWO_USER is None:
     raise ImproperlyConfigured("Django-GWO is missing the GWO_PASSWORD setting.")
 
