@@ -1,16 +1,18 @@
 from django.db import models
 
+import settings
+
 EXPERIMENT_STATUSES = (
-    ('New', 1),
-    ('Running', 2), 
-    ('Paused', 3), 
-    ('Finished', 4),
+    (1, 'New'),
+    (2, 'Running'), 
+    (3, 'Paused'), 
+    (4, 'Finished'),
 )
 AUTO_PRUNE_MODES = (
-    ('None', 0),
-    ('Conservative', 1),
-    ('Normal', 2),
-    ('Aggressive', 3),
+    (0, 'None'),
+    (1, 'Conservative'),
+    (2, 'Normal'),
+    (3, 'Aggressive'),
 )
 
 
