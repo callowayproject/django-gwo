@@ -27,7 +27,7 @@ class ExperimentQuery(AnalyticsBaseQuery):
         """
         path = ['/analytics/feeds/websiteoptimizer/experiments']
         if self.exp_id:
-            path.append(self.exp_id)
+            path.append(unicode(self.exp_id))
         return ('/'.join(path))
 
 
@@ -43,7 +43,7 @@ class SectionQuery(AnalyticsBaseQuery):
         :type  section_id: int, str, or unicode
         """
         if experiment and isinstance(experiment, (int, basestring)):
-            self.exp_id = experiment
+            self.exp_id = unicode(experiment)
         elif experiment and isinstance(experiment, gwo_data.ExperimentEntry):
             self.exp_id = experiment.experiment_id.text
         else:
@@ -63,7 +63,7 @@ class SectionQuery(AnalyticsBaseQuery):
             'sections',
         ]
         if self.section_id:
-            path.append(self.section_id)
+            path.append(unicode(self.section_id))
         return '/'.join(path)
 
 
@@ -105,8 +105,8 @@ class VariationQuery(AnalyticsBaseQuery):
                     self.variation_id = args[2]
         if kwargs:
             if 'experiment_id' in kwargs:
-                self.exp_id = kwargs.pop('experiment_id')
-                self.section_id = kwargs.pop('section_id')
+                self.exp_id = unicode(kwargs.pop('experiment_id'))
+                self.section_id = unicode(kwargs.pop('section_id'))
             else:
                 section = kwargs.pop('section')
                 self.exp_id = section.experiment_id.text
@@ -121,13 +121,13 @@ class VariationQuery(AnalyticsBaseQuery):
         """
         path = [
             '/analytics/feeds/websiteoptimizer/experiments',
-            self.exp_id,
+            unicode(self.exp_id),
             'sections',
-            self.section_id,
+            unicode(self.section_id),
             'variations',
         ]
         if self.variation_id:
-            path.append(self.variation_id)
+            path.append(unicode(self.variation_id))
         return "/".join(path)
 
 
@@ -143,7 +143,7 @@ class CombinationQuery(AnalyticsBaseQuery):
         :type combination_id: int, str, or unicode
         """
         if experiment and isinstance(experiment, (int, basestring)):
-            exp_id = experiment
+            exp_id = unicode(experiment)
         elif experiment and isinstance(experiment, gwo_data.ExperimentEntry):
             exp_id = experiment.experiment_id.text
         else:
@@ -164,7 +164,7 @@ class CombinationQuery(AnalyticsBaseQuery):
             'combinations',
         ]
         if self.combination_id:
-            path.append(self.combination_id)
+            path.append(unicode(self.combination_id))
         return "/".join(path)
 
 
@@ -343,7 +343,7 @@ class WebsiteOptimizerClient(AnalyticsClient):
         if isinstance(experiment, gwo_data.ExperimentEntry):
             exp_id = experiment.experiment_id.text
         else:
-            exp_id = experiment
+            exp_id = unicode(experiment)
         
         entry = gwo_data.SectionEntry(title=atom.data.Title(text=title))
         return self.post(entry, SectionQuery(exp_id))
