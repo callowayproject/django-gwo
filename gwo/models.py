@@ -84,6 +84,29 @@ class GwoExperiment(models.Model):
         self._sync_gwo_experiment()
         super(GwoExperiment, self).save(*args, **kwargs)
 
+class GwoAbPageVariation(models.Model):
+    """
+    A Page Variation in an A/B Experiment
+    """
+    gwo_experiment = models.ForeignKey(
+        GwoExperiment, 
+        verbose_name="Experiment",
+        limit_choices_to={'experiment_type':'AB'})
+    appagevariation_id = models.IntegerField(
+        "GWO AB Page Variation ID", 
+        blank=True, 
+        null=True,
+        help_text="This is the ID assigned by Google Website Optimizer.",
+    )
+    title = models.CharField(max_length=100)
+    content = models.URLField("Page URL", verify_exists=False)
+    
+    class Meta:
+        pass
+    
+    def __unicode__(self):
+        return self.title
+
 class GwoSection(models.Model):
     """
     A section within a multivariate GWO experiment
