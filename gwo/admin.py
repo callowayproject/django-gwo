@@ -1,4 +1,3 @@
-from django import forms
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 
@@ -8,13 +7,18 @@ def view_experiment(obj):
     """
     Show link to the source experiment
     """
-    from django.core.urlresolvers import reverse
-    admin_path = reverse("admin:gwo_gwoexperiment_change", args=(obj.gwo_experiment.pk,))
-    return '<a href="%s" class="linkbutton">View experiment</a>' % admin_path
+    admin_path = reverse(
+        "admin:gwo_gwoexperiment_change", 
+        args=(obj.gwo_experiment.pk,))
+    return '<a href="%s" class="linkbutton">%s (View)</a>' % \
+            (admin_path, obj.gwo_experiment.title)
 view_experiment.allow_tags = True
 view_experiment.short_description = 'Experiment'
 
 def view_sections(obj):
+    """
+    Show the number of sections on an experiment and a link to view them
+    """
     if obj.experiment_type == 'Multivariate':
         num_sections = obj.gwosection_set.count()
         if num_sections == 1:
@@ -22,26 +26,46 @@ def view_sections(obj):
         else:
             response = ['%s sections' % num_sections]
         admin_path = reverse("admin:gwo_gwosection_changelist")
-        response.append('<a href="%s?gwo_experiment__id__exact=%s" class="linkbutton">View</a>' % (admin_path, obj.id))
-    else:
-        pass
-    return "&nbsp;|&nbsp;".join(response)
+        response.append(''.join([
+            '<a href="%s' % admin_path,
+            '?gwo_experiment__id__exact=%s" ' % obj.id,
+            'class="linkbutton">View</a>']))
+        return "&nbsp;|&nbsp;".join(response)
+    return ''
 view_sections.allow_tags = True
 view_sections.short_description = 'Sections'
 
+def view_section(obj):
+    """
+    Show the related section name and link to it
+    """
+    admin_path = reverse(
+        "admin:gwo_gwosection_change", 
+        args=(obj.gwo_section.pk,))
+    return '<a href="%s" class="linkbutton">%s (View)</a>' \
+            % (admin_path, obj.gwo_section.title)
+view_section.allow_tags = True
+view_section.short_description = 'Section'
+
 def add_section(obj):
     """
-    Show button for the creation of sections/page variations
+    Show button for the creation of sections 
+    (if experiment type is multivariate)
     """
     if obj.experiment_type == 'Multivariate':
         admin_path = reverse("admin:gwo_gwosection_add")
-        return '<a href="%s?gwo_experiment=%s" class="linkbutton">Add section</a>' % (admin_path, obj.id)
-    else:
-        return ''
+        return ''.join([
+            '<a href="%s' % admin_path,
+            '?gwo_experiment=%s" ' % obj.id,
+            'class="linkbutton">Add section</a>'])
+    return ''
 add_section.allow_tags = True
 add_section.short_description = 'Add Section'
 
 def sections(obj):
+    """
+    Combination of the view_sections and add_section to put it all in one field
+    """
     parts = [view_sections(obj), add_section(obj)]
     return '&nbsp;|&nbsp;'.join(parts)
 sections.allow_tags = True
@@ -64,19 +88,20 @@ view_variations.allow_tags = True
 
 def add_variation(obj):
     """
+    Add a variation to a section
     """
     admin_path = reverse("admin:gwo_gwovariation_add")
-    return '<a href="%s?gwo_section=%s&amp;gwo_experiment=%s" class="linkbutton">Add variation</a>' % (admin_path, obj.id, obj.gwo_experiment.id)
+    return ''.join([
+        '<a href="%s' % admin_path,
+        '?gwo_section=%s' % obj.id,
+        '&amp;gwo_experiment=%s" ' % obj.gwo_experiment.id,
+        'class="linkbutton">Add variation</a>'])
 add_variation.allow_tags = True
 
 def variations(obj):
     parts = [view_variations(obj), add_variation(obj)]
     return '&nbsp;|&nbsp;'.join(parts)
 variations.allow_tags = True
-
-class GwoSectionInlineAdmin(admin.TabularInline):
-    model = GwoSection
-    fields = ('title')
 
 
 class GwoExperimentAdmin(admin.ModelAdmin):
@@ -108,7 +133,7 @@ class GwoExperimentAdmin(admin.ModelAdmin):
 admin.site.register(GwoExperiment, GwoExperimentAdmin)
 
 class GwoSectionAdmin(admin.ModelAdmin):
-    list_display = ('gwo_experiment', 'title', view_experiment, variations)
+    list_display = ('title', view_experiment, variations)
     search_fields = ('title',)
     read_only_fields = ('section_id',)
     fieldsets = ((None, {'fields': ('gwo_experiment', 'title', 'section_id')}),)
@@ -121,6 +146,9 @@ class GwoSectionAdmin(admin.ModelAdmin):
             return super(GwoSectionAdmin, self).lookup_allowed(lookup)
     
     def get_fieldsets(self, request, obj=None, **kwargs):
+        """
+        We return a different set of fieldsets if it is an add operation
+        """
         if obj is None:
             return self.add_fieldsets
         return super(GwoSectionAdmin, self).get_fieldsets(request, obj, **kwargs)
@@ -150,9 +178,17 @@ class GwoSectionAdmin(admin.ModelAdmin):
 admin.site.register(GwoSection, GwoSectionAdmin)
 
 class GwoVariationAdmin(admin.ModelAdmin):
-    list_display = ('gwo_experiment', 'gwo_section', 'title')
-    fieldsets = ((None, {'fields': ('gwo_experiment', 'gwo_section', 'title', 'variation_id')}),)
-    add_fieldsets = ((None, {'fields': ('gwo_experiment', 'title')}),)
+    list_display = ('title', view_experiment, view_section)
+    fieldsets = (
+        (None, {
+            'fields': ('gwo_experiment', 'gwo_section', 'title', 'content',)
+        }), (
+        'Extra Information', {
+            'fields': ('variation_id',),
+            'classes': ('collapse',)
+        }),
+    )
+    add_fieldsets = ((None, {'fields': ('gwo_experiment', 'gwo_section', 'title', 'content')}),)
     read_only_fields = ('variation_id',)
     
     def lookup_allowed(self, lookup):
