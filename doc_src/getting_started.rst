@@ -24,11 +24,19 @@ Creating an experiment
 Create a section for an experiment
 ==================================
 
-#. Each listing of experiments includes a field detailing how many sections are currently defined for that experiment and links to view the sections or add a section. Click on **Add section**.
+#. Each listing of experiments includes a field detailing how many sections are currently defined for that experiment and links to view the experiment's sections or add a section. Click on **Add section**.
 
 #. The **Experiment** field will already be set, so simply enter in the **Title** for this section.
 
-#. Clicking on **Save** will save this section and take you to the list of all sections. Clicking on **Save and add another** will save this section and create a new section, but the **Experiment** will not be pre-filled.
+#. Clicking on **Save** will save this section and take you to the list of all sections. Clicking on **Save and add another** will save this section and allow you to add a new section.
+
+
+Create a variation for an experiment
+====================================
+
+#. Each list of sections includes a field detailing how many variations are currently defined for that section and links to view the section's variations or add a variation to the section. Click on **Add variation**.
+
+#. The **Experiment**
 
 
 Tagging the template
