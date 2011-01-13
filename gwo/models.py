@@ -111,7 +111,10 @@ class GwoSection(models.Model):
     """
     A section within a multivariate GWO experiment
     """
-    gwo_experiment = models.ForeignKey(GwoExperiment, verbose_name="Experiment")
+    gwo_experiment = models.ForeignKey(
+        GwoExperiment, 
+        verbose_name="Experiment",
+        limit_choices_to={'experiment_type': 'Multivariate'})
     section_id = models.IntegerField(
         "GWO Section ID", 
         blank=True, 
