@@ -124,6 +124,28 @@ class GwoSectionAdmin(admin.ModelAdmin):
         if obj is None:
             return self.add_fieldsets
         return super(GwoSectionAdmin, self).get_fieldsets(request, obj, **kwargs)
+    
+    def add_view(self, request, form_url='', extra_context=None):
+        """
+        Add the querystrings into the form url so we can use them if they
+        click on "Continue and add another"
+        """
+        if request.META['QUERY_STRING']:
+            form_url = '?%s' % request.META['QUERY_STRING']
+        return super(GwoSectionAdmin, self).add_view(request, form_url, extra_context)
+    
+    def response_add(self, request, obj, post_url_continue='../%s/'):
+        """
+        Check if they clicked on "Continue and add another" and add any
+        passed query strings.
+        """
+        response = super(GwoSectionAdmin, self).response_add(request, obj, post_url_continue)
+        if request.META['QUERY_STRING'] and "_addanother" in request.POST:
+            if '?' in response['Location']:
+                response['Location'] = '%s&%s' % (response['Location'], request.META['QUERY_STRING'])
+            else:
+                response['Location'] = '%s?%s' % (response['Location'], request.META['QUERY_STRING'])
+        return response
 
 admin.site.register(GwoSection, GwoSectionAdmin)
 
@@ -143,5 +165,19 @@ class GwoVariationAdmin(admin.ModelAdmin):
         if obj is None:
             return self.add_fieldsets
         return super(GwoVariationAdmin, self).get_fieldsets(request, obj, **kwargs)
-
+    
+    def add_view(self, request, form_url='', extra_context=None):
+        if request.META['QUERY_STRING']:
+            form_url = '?%s' % request.META['QUERY_STRING']
+        return super(GwoVariationAdmin, self).add_view(request, form_url, extra_context)
+    
+    def response_add(self, request, obj, post_url_continue='../%s/'):
+        response = super(GwoVariationAdmin, self).response_add(request, obj, post_url_continue)
+        if request.META['QUERY_STRING'] and "_addanother" in request.POST:
+            if '?' in response['Location']:
+                response['Location'] = '%s&%s' % (response['Location'], request.META['QUERY_STRING'])
+            else:
+                response['Location'] = '%s?%s' % (response['Location'], request.META['QUERY_STRING'])
+        return response
+    
 admin.site.register(GwoVariation, GwoVariationAdmin)
