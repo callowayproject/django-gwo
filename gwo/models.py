@@ -215,7 +215,10 @@ class GwoVariation(models.Model):
         """
         Sync with Google Website Optimizer
         """
+        from django.core.exceptions import ValidationError
+        if self.gwo_experiment != self.gwo_section.gwo_experiment:
+            raise ValidationError("The experiment and the section don't go together!")
         self._sync_gwo_variation()
-        super(GwoSection, self).save(*args, **kwargs)
+        super(GwoVariation, self).save(*args, **kwargs)
     
         
