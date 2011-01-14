@@ -75,8 +75,12 @@ class GwoExperiment(models.Model):
     def save(self, *args, **kwargs):
         """
         Sync with Google Website Optimizer
+        
+        The local_only=True keyword argument will prevent syncing the item with
+        Google Website Optimizer's API
         """
-        self._sync_gwo_experiment()
+        if not kwargs.pop('local_only', False):
+            self._sync_gwo_experiment()
         super(GwoExperiment, self).save(*args, **kwargs)
 
 class GwoAbPageVariation(models.Model):
@@ -152,8 +156,12 @@ class GwoSection(models.Model):
     def save(self, *args, **kwargs):
         """
         Sync with Google Website Optimizer
+        
+        The local_only=True keyword argument will prevent syncing the item with
+        Google Website Optimizer's API
         """
-        self._sync_gwo_section()
+        if not kwargs.pop('local_only', False):
+            self._sync_gwo_section()
         super(GwoSection, self).save(*args, **kwargs)
 
 
@@ -211,11 +219,15 @@ class GwoVariation(models.Model):
     def save(self, *args, **kwargs):
         """
         Sync with Google Website Optimizer
+        
+        The local_only=True keyword argument will prevent syncing the item with
+        Google Website Optimizer's API
         """
         from django.core.exceptions import ValidationError
         if self.gwo_experiment != self.gwo_section.gwo_experiment:
             raise ValidationError("The experiment and the section don't go together!")
-        self._sync_gwo_variation()
+        if not kwargs.pop('local_only', False):
+            self._sync_gwo_variation()
         super(GwoVariation, self).save(*args, **kwargs)
     
         
