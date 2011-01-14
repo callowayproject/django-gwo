@@ -140,7 +140,15 @@ class GwoSectionAdmin(admin.ModelAdmin):
     list_display = ('title', view_experiment, variations)
     search_fields = ('title',)
     read_only_fields = ('section_id',)
-    fieldsets = ((None, {'fields': ('gwo_experiment', 'title', 'section_id')}),)
+    fieldsets = (
+        (None, {
+            'fields': ('gwo_experiment', 'title',),
+        }), (
+        'Extra Information', {
+            'fields': ('section_id', 'begin_script', 'end_script'),
+            'classes': ('collapse',)
+        }),
+    )
     add_fieldsets = ((None, {'fields': ('gwo_experiment', 'title')}),)
     
     def lookup_allowed(self, lookup):
