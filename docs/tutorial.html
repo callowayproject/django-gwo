@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; django-gwo v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="getting_started.html" />
+    <link rel="prev" title="Multivariate testing of dynamic pages" href="overview.html" /> 
+  </head>
+  <body>
+<div id="docstitle">
+	<p>django-gwo v0.1 documentation</p>
+</div>
+<div id="header">
+	<div id="title"><h1>Tutorial</h1></div>
+	<ul id="headerButtons">
+		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
+		<li id="page_buttons">
+			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="getting_started.html" title="Getting Started" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="overview.html" title="Multivariate testing of dynamic pages" accesskey="P">previous</a></div>
+		</li>
+	</ul>
+</div>
+
+<div id="sphinxsidebar">
+  <div class="sphinxsidebarwrapper">
+	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
+	<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Multivariate testing of dynamic pages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#starting-out">Starting out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#original-template-state">Original template state</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-in-the-template-tags">Add in the template tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-the-sections-in-the-template">Define the sections in the template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-top-nav-original-variation">Create Top Nav Original Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-top-nav-alternate-variation">Create Top Nav Alternate Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-bottom-nav-original-variation">Create Bottom Nav Original Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management_commands.html">Management Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
+</ul>
+
+    <div id="searchbox" style="display: none">
+      
+        <form class="search" action="search.html" method="get">
+			<div class="search-wrapper">
+			<span class="search-left"></span>
+			<input class="prettysearch" type="text" name="q" size="18" />
+			<span class="search-right">&nbsp;</span>
+			</div>
+          <input type="submit" value="Search" class="searchbutton" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+        <p class="searchtip" style="font-size: 90%">
+        Enter search terms or a module, class or function name.
+        </p>
+    </div>
+    <script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+</div>
+
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>We want to get people to go to other blog posts. In our example blog app, the blog entries have next and previous post links at the top of the page and only at the top of the page. Does moving the links to the bottom of the blog entry increase the amount of times people click on them?</p>
+<p>To test this question we are going to run a multivariate experiment with two sections (&#8220;Top Nav&#8221; and &#8220;Bottom Nav&#8221;). Each variation will have two variations: the &#8220;Original&#8221; and an alternate. The &#8220;Top Nav&#8221; Original variation will show the navigation and the alternate will not show the navigation. The &#8220;Bottom Nav&#8221; Original variation will not show the navigation and the alternate will show the navigation.</p>
+<p>GWO will test all four possible combinations:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="38%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Top Nav</th>
+<th class="head">Bottom Nav</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Original</td>
+<td>showing</td>
+<td>not showing</td>
+</tr>
+<tr><td>Combo 2</td>
+<td>showing</td>
+<td>showing</td>
+</tr>
+<tr><td>Combo 3</td>
+<td>not showing</td>
+<td>showing</td>
+</tr>
+<tr><td>Combo 4</td>
+<td>not showing</td>
+<td>showing</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="starting-out">
+<h2>Starting out<a class="headerlink" href="#starting-out" title="Permalink to this headline">¶</a></h2>
+<p>Make sure that you have a <tt class="docutils literal"><span class="pre">local_settings.py</span></tt> file with settings for <tt class="docutils literal"><span class="pre">GWO_USER</span></tt>, <tt class="docutils literal"><span class="pre">GWO_PASSWORD</span></tt>, <tt class="docutils literal"><span class="pre">GWO_ACCOUNT</span></tt>.</p>
+<ol class="arabic simple">
+<li>Create example experiment (link to those docs)</li>
+<li>If you go to the Google Website Optimizer site, you&#8217;ll see the experiment.</li>
+<li>Click on the Add Section link</li>
+<li>Name the section &#8220;Top Nav&#8221;</li>
+<li>Click on &#8220;Save and add another&#8221;</li>
+<li>Name the section &#8220;Bottom Nav&#8221;</li>
+<li>Click on &#8220;Save&#8221;</li>
+</ol>
+</div>
+<div class="section" id="original-template-state">
+<h2>Original template state<a class="headerlink" href="#original-template-state" title="Permalink to this headline">¶</a></h2>
+<p>GWO wants at least one &#8220;Original&#8221; variation and one additional variation for each section. Each variation contains the raw content that GWO will dynamically insert into the document. <strong>As a result, the section and variation can not contain anything dynamic on the page.</strong> This means that we are going to have to play some tricks to test what we want to test.</p>
+<p>We are going to alter the template to include the blog post navigation, but use inline CSS to hide them. We will define the sections around the <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> tag.</p>
+<p>First, let&#8217;s get the template to its &#8220;original&#8221; state.</p>
+<ol class="arabic">
+<li><p class="first">Open the <tt class="docutils literal"><span class="pre">blog/templates/blog/post_detail.html</span></tt> template, and copy the lines 12 - 19 (these lines here):</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;p class=&quot;other_posts&quot;&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.get_previous_by_publish</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;a class=&quot;previous&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View previous post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;&amp;laquo; </span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.get_next_by_publish</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  | &lt;a class=&quot;next&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View next post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish</span> <span class="cp">}}</span><span class="x"> &amp;raquo;&lt;/a&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">&lt;/p&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Paste it just after (around lines 27 - 29):</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;div class=&quot;body&quot;&gt;</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nv">object.body</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>If you were to render a blog entry right now, the next and previous post links would appear above and below the entry.</p>
+</li>
+<li><p class="first">To make the bottom links disappear, we&#8217;ll add some inline CSS to the bottom <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> tag:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;p class=&quot;other_posts&quot; style=&quot;display: None&quot;&gt;</span>
+</pre></div>
+</div>
+<p>Now rendering a blog entry shows the links at the top, but not at the bottom. We have our &#8220;original&#8221; state:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;div class=&quot;body&quot;&gt;</span>
+<span class="x">  </span><span class="cp">{{</span> <span class="nv">object.body</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">&lt;/div&gt;</span>
+<span class="x">&lt;p class=&quot;other_posts&quot; style=&quot;display:None&quot;&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.get_previous_by_publish</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;a class=&quot;previous&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View previous post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;&amp;laquo; </span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">object.get_next_by_publish</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  | &lt;a class=&quot;next&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View next post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish</span> <span class="cp">}}</span><span class="x"> &amp;raquo;&lt;/a&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">&lt;/p&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="add-in-the-template-tags">
+<h2>Add in the template tags<a class="headerlink" href="#add-in-the-template-tags" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">In line 3, change the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">i18n</span> <span class="pre">comments</span> <span class="pre">%}</span></tt> to:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">i18n</span> <span class="nv">comments</span> <span class="nv">gwo_tags</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We need to specify the experiment we are using. The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">set_experiment</span> <span class="pre">%}</span></tt> template tag does this for us. Due to the Django template language, the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">set_experiment</span> <span class="pre">%}</span></tt> value is only seen within its current <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>. For the sake of this tutorial, we&#8217;ll put everything within <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content</span> <span class="pre">%}</span></tt>.</p>
+<dl class="docutils">
+<dt>On line 11, right after <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content_title</span> <span class="pre">%}</span></tt>, insert::</dt>
+<dd><p class="first last">{% set_experiment &#8220;Example Experiment&#8221; %}
+{{ gwo_experiment.control_script|safe }}</p>
+</dd>
+</dl>
+<p>On line 26, right after <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">content</span> <span class="pre">%}</span></tt>, insert:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">set_experiment</span> <span class="s2">&quot;Example Experiment&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Just before the last <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></tt>(around line 68), add:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">gwo_experiment.tracking_script</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>to include another script that GWO needs.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="define-the-sections-in-the-template">
+<h2>Define the sections in the template<a class="headerlink" href="#define-the-sections-in-the-template" title="Permalink to this headline">¶</a></h2>
+<p>To define the sections, we will use the template tags <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_start</span> <span class="pre">section</span> <span class="pre">%}</span></tt> and <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_end_section</span> <span class="pre">%}</span></tt>.</p>
+<ol class="arabic">
+<li><p class="first">Around line 14, change <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;&gt;</span></tt> to:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">gwo_start_section</span> <span class="s2">&quot;Top Nav&quot;</span> <span class="cp">%}</span><span class="x">&lt;p class=&quot;other_posts&quot;&gt;</span><span class="cp">{%</span> <span class="k">gwo_end_section</span> <span class="s2">&quot;Top Nav&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Around line 33, change <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;</span> <span class="pre">style=&quot;display:</span> <span class="pre">None&quot;&gt;</span></tt> to:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">gwo_start_section</span> <span class="s2">&quot;Bottom Nav&quot;</span> <span class="cp">%}</span><span class="x">&lt;p class=&quot;other_posts&quot; style=&quot;display: None&quot;&gt;</span><span class="cp">{%</span> <span class="k">gwo_end_section</span> <span class="s2">&quot;Bottom Nav&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="create-top-nav-original-variation">
+<h2>Create Top Nav Original Variation<a class="headerlink" href="#create-top-nav-original-variation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Title:</strong> <tt class="docutils literal"><span class="pre">Original</span></tt></p>
+<p><strong>Content:</strong> <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;&gt;</span></tt></p>
+</div>
+<div class="section" id="create-top-nav-alternate-variation">
+<h2>Create Top Nav Alternate Variation<a class="headerlink" href="#create-top-nav-alternate-variation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Title:</strong> <tt class="docutils literal"><span class="pre">Not</span> <span class="pre">Showing</span></tt></p>
+<p><strong>Content:</strong> <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;</span> <span class="pre">style=&quot;display:</span> <span class="pre">None&quot;&gt;</span></tt></p>
+</div>
+<div class="section" id="create-bottom-nav-original-variation">
+<h2>Create Bottom Nav Original Variation<a class="headerlink" href="#create-bottom-nav-original-variation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Title:</strong> <tt class="docutils literal"><span class="pre">Original</span></tt></p>
+<p><strong>Content:</strong> <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;</span> <span class="pre">style=&quot;display:</span> <span class="pre">None&quot;&gt;</span></tt></p>
+</div>
+<div class="section" id="create-bottom-nav-alternate-variation">
+<h2>Create Bottom Nav Alternate Variation<a class="headerlink" href="#create-bottom-nav-alternate-variation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Title:</strong> <tt class="docutils literal"><span class="pre">Showing</span></tt></p>
+<p><strong>Content:</strong> <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;&gt;</span></tt></p>
+</div>
+</div>
+
+
+          </div> 
+        </div>
+      </div>
+    <div class="footer">
+    <p>
+      &copy; Copyright 2010, The Washington Times.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+	</p>
+    </div>
+      <div class="clearer"></div>
+    </div>
+	<div id="breadcrumbs">
+		Tutorial
+		</ul>
+	</div>
+	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>
+  </body>
+</html>

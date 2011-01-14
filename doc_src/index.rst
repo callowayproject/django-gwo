@@ -9,8 +9,10 @@ Contents:
    
    installation
    overview
+   tutorial
    getting_started
    using_gwoweboptimizer
+   management_commands
    reference/index
 
 Indices and tables

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python Module Index &mdash; django-gwo v0.1 documentation</title>
+    <title>Multivariate testing of dynamic pages &mdash; django-gwo v0.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -22,21 +22,22 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
- 
-
-
+    <link rel="next" title="Starting out" href="tutorial.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
   </head>
   <body>
 <div id="docstitle">
 	<p>django-gwo v0.1 documentation</p>
 </div>
 <div id="header">
-	<div id="title"><h1>Python Module Index</h1></div>
+	<div id="title"><h1>Multivariate testing of dynamic pages</h1></div>
 	<ul id="headerButtons">
 		<li id="toc_button"><div class="headerButton"><a href="#">Table of Contents</a></div></li>
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
-			<div class="headerButton"><a href="#" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
+			<div class="headerButton"><a href="tutorial.html" title="Starting out" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="installation.html" title="Installation" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -44,13 +45,16 @@
 <div id="sphinxsidebar">
   <div class="sphinxsidebarwrapper">
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
-	<ul>
+	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="overview.html">Multivariate testing of dynamic pages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Multivariate testing of dynamic pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Starting out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-original-variation">Create Top Nav Original Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-alternate-variation">Create Top Nav Alternate Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-original-variation">Create Bottom Nav Original Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
-<li class="toctree-l1"><a class="reference internal" href="management_commands.html">Management Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
 </ul>
 
@@ -81,34 +85,18 @@
         <div class="bodywrapper">
           <div class="body">
             
-
-   <h1>Python Module Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-g"><strong>g</strong></a>
-   </div>
-
-   <table class="indextable modindextable" cellspacing="0" cellpadding="2">
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap"><td></td><td><a name="cap-g">
-           <strong>g</strong></a></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" id="toggle-1"
-              class="toggler" style="display: none" alt="-" /></td>
-       <td>
-       <tt class="xref">gwo</tt></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&nbsp;&nbsp;&nbsp;
-       <a href="reference/websiteoptimizer/client.html#module-gwo.websiteoptimizer.client"><tt class="xref">gwo.websiteoptimizer.client</tt></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&nbsp;&nbsp;&nbsp;
-       <a href="reference/websiteoptimizer/data.html#module-gwo.websiteoptimizer.data"><tt class="xref">gwo.websiteoptimizer.data</tt></a></td><td>
-       <em></em></td></tr>
-   </table>
+  <div class="section" id="multivariate-testing-of-dynamic-pages">
+<h1>Multivariate testing of dynamic pages<a class="headerlink" href="#multivariate-testing-of-dynamic-pages" title="Permalink to this headline">¶</a></h1>
+<p>Typically multivariate testing is testing multiple combinations of things on one page (the test URL), so see if they lead towards more readers getting to another page (the conversion URL). This falls apart when you want to test combinations of a template-driven site: the content and URL is variable, but the underlying template is constant. It really goes to hell when you don&#8217;t care which page they go to on your site, just that they go to another page.</p>
+<dl class="docutils">
+<dt><strong>Experiment</strong></dt>
+<dd>The test.</dd>
+<dt><strong>Section</strong></dt>
+<dd>Parts of the template which will vary. Google Website Optimizer uses JavaScript to insert the content into these areas, so make sure the parts that you are testing will allow JavaScript to fill it.</dd>
+<dt><strong>Variation</strong></dt>
+<dd>A bit of content for a section of an experiment. Google Website Optimizer fills this content into the section with JavaScript.</dd>
+</dl>
+</div>
 
 
           </div> 
@@ -123,7 +111,7 @@
       <div class="clearer"></div>
     </div>
 	<div id="breadcrumbs">
-		Python Module Index
+		Multivariate testing of dynamic pages
 		</ul>
 	</div>
 	<script type="text/javascript" charset="utf-8" src="_static/toc.js"></script>

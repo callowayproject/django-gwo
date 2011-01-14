@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
     <link rel="next" title="Using the weboptimizer gdata Extension" href="using_gwoweboptimizer.html" />
-    <link rel="prev" title="Installation" href="installation.html" /> 
+    <link rel="prev" title="Starting out" href="tutorial.html" /> 
   </head>
   <body>
 <div id="docstitle">
@@ -37,7 +37,7 @@
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
 			<div class="headerButton"><a href="using_gwoweboptimizer.html" title="Using the weboptimizer gdata Extension" accesskey="N">next</a></div>
-			<div class="headerButton"><a href="installation.html" title="Installation" accesskey="P">previous</a></div>
+			<div class="headerButton"><a href="tutorial.html" title="Starting out" accesskey="P">previous</a></div>
 		</li>
 	</ul>
 </div>
@@ -47,11 +47,17 @@
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#creating-an-experiment">Creating an experiment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#step-one">Step One</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-two">Step Two</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-two-a-tagging-the-template">Step Two-A: Tagging the template</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Multivariate testing of dynamic pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Starting out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-original-variation">Create Top Nav Original Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-alternate-variation">Create Top Nav Alternate Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-original-variation">Create Bottom Nav Original Variation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-experiment">Creating an experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-section-for-an-experiment">Create a section for an experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-variation-for-an-experiment">Create a variation for an experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tagging-the-template">Tagging the template</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
@@ -87,43 +93,35 @@
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Multivariate testing of dynamic pages</p>
-<p>Content of the page is dynamic, but the template is constant
-Conversion page is dynamic, but link is constant</p>
-</div>
 <div class="section" id="creating-an-experiment">
-<h1>Creating an experiment<a class="headerlink" href="#creating-an-experiment" title="Permalink to this headline">¶</a></h1>
-<p>Create a <a class="reference external" href="https://www.google.com/analytics/siteopt/planning">multivariate experiment</a> with Google Website Optimizer first.</p>
+<h2>Creating an experiment<a class="headerlink" href="#creating-an-experiment" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>For step one, select a page (url) that is formatted using the template. For example, if you are testing a blog entry page, pick a recent blog entry for the page url.</li>
-<li>For step two, decide what parts of the page you are going to test</li>
-<li>For step three, since you are probably the technical team, it isn&#8217;t really necessary.</li>
-<li>For step four, you don&#8217;t have to worry about. We will be tracking the conversion using javascript.</li>
-<li>Click on the checkbox at the bottom of the page labeled &#8220;I&#8217;ve completed the steps above and I&#8217;m ready to start setting up my experiment.&#8221; and then the create button.</li>
-</ol>
-<div class="section" id="step-one">
-<h2>Step One<a class="headerlink" href="#step-one" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Name your experiment.</li>
-<li>Put in the URL of the representative page for the <strong>Test page URL</strong></li>
+<li>Create a new Experiment in the Django admin.</li>
+<li>Name your experiment in the <strong>Title</strong> field.</li>
+<li>Set &#8216;Multivariate&#8217; as the <strong>Experiment type</strong>.</li>
+<li>Put in the URL of the representative page for the <strong>Test page URL</strong>. For example, if you are testing a blog entry page, pick a recent blog entry for the page url.</li>
 <li>Put in the same URL for the <strong>Conversion page URL</strong></li>
-<li>Click the continue button</li>
+<li>Leave <strong>Auto prune mode</strong> at None, unless you really know what you&#8217;re doing.</li>
+<li>Save the experiment.</li>
 </ol>
 </div>
-<div class="section" id="step-two">
-<h2>Step Two<a class="headerlink" href="#step-two" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-section-for-an-experiment">
+<h2>Create a section for an experiment<a class="headerlink" href="#create-a-section-for-an-experiment" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Select <strong>You will install and validate the JavaScript tags</strong></li>
-<li>Click the continue button</li>
-<li>Now, <strong>in a new window,</strong> create a new GWO Experiment in the Django admin.</li>
-<li>Give the Django GWO experiment the same name you entered in Website Optimizer (for sanity reasons)</li>
-<li>Copy the control script from the Website Optimizer page and paste it into the control script field in the GWO experiment record.</li>
-<li>Copy the tracking script from the Website Optimizer page and paste it into the tracking script field in the GWO experiment record.</li>
-<li>Copy the conversion script from the Website Optimizer page and paste it into the conversion script field in the GWO experiment record.</li>
+<li>Each listing of experiments includes a field detailing how many sections are currently defined for that experiment and links to view the experiment&#8217;s sections or add a section. Click on <strong>Add section</strong>.</li>
+<li>The <strong>Experiment</strong> field will already be set, so simply enter in the <strong>Title</strong> for this section.</li>
+<li>Clicking on <strong>Save</strong> will save this section and take you to the list of all sections. Clicking on <strong>Save and add another</strong> will save this section and allow you to add a new section.</li>
 </ol>
 </div>
-<div class="section" id="step-two-a-tagging-the-template">
-<h2>Step Two-A: Tagging the template<a class="headerlink" href="#step-two-a-tagging-the-template" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-variation-for-an-experiment">
+<h2>Create a variation for an experiment<a class="headerlink" href="#create-a-variation-for-an-experiment" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Each list of sections includes a field detailing how many variations are currently defined for that section and links to view the section&#8217;s variations or add a variation to the section. Click on <strong>Add variation</strong>.</li>
+<li>The <strong>Experiment</strong></li>
+</ol>
+</div>
+<div class="section" id="tagging-the-template">
+<h2>Tagging the template<a class="headerlink" href="#tagging-the-template" title="Permalink to this headline">¶</a></h2>
 <p>Before you can go on with Website Optimizer, you need to tag the pages so google can validate them. Django-GWO provides some easy tags to make the process easier than the instructions in Website Optimizer.</p>
 <ol class="arabic">
 <li><p class="first">At the top of the template, add <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">gwo_tags</span> <span class="pre">%}</span></tt>.</p>
