@@ -14,44 +14,67 @@ def resolve_or_literal(variable, context):
         var = variable.literal or variable.var
     return var
 
-def _get_context_from_exp_name(experiment_name):
-    """
-    Get an experiment by its name. Used for several inclusion templates
-    """
-    try:
-        exp = GwoExperiment.objects.get(slug=experiment_name)
-    except GwoExperiment.DoesNotExist:
-        exp = None
-    return template.Context({'experiment': exp, 'gwo_account': settings.GWO_ACCOUNT})
 
-class GwoInclusionNode(template.Node):
-    def __init__(self, tmpl, experiment_name):
-        self.experiment_name = template.Variable(experiment_name)
-        self.template = tmpl
+class GwoSectionNode(template.Node):
+    def __init__(self, section_name, start):
+        self.section_name = template.Variable(section_name)
+        self.start = start
     
     def render(self, context):
-        from django.template.loader import get_template
-        exp_name = resolve_or_literal(self.experiment_name, context)
-        ctxt = _get_context_from_exp_name(exp_name)
-        
-        tmpl = get_template(self.template)
-        return tmpl.render(ctxt)
+        try:
+            section_name = resolve_or_literal(self.section_name, context)
+            exp = context.get('gwo_experiment')
+            section = exp.gwosection_set.get(title=section_name)
+            if self.start:
+                print section
+                print section.begin_script
+                return section.begin_script
+            else:
+                return section.end_script
+        except GwoSection.DoesNotExist:
+            raise template.TemplateSyntaxError("Can't find section %s in experiment %s" % (section_name, exp.title))
 
-def gwo_generic_compiler(parser, token, template):
+
+class GwoExperimentNode(template.Node):
+    def __init__(self, experiment_name):
+        self.experiment_name = template.Variable(experiment_name)
+    
+    def render(self, context):
+        try:
+            exp_name = resolve_or_literal(self.experiment_name, context)
+            exp = GwoExperiment.objects.get(title=exp_name)
+        except GwoExperiment.DoesNotExist:
+            raise template.TemplateSyntaxError("Can't find experiment named %s" % exp_name)
+        context['gwo_experiment'] = exp
+        print [d.keys() for d in context.dicts]
+        return ''
+
+
+@register.tag
+def set_experiment(parser, token):
+    """
+    Set a variable ``gwo_experiment`` within the context to the experiment.
+    
+    {% set_experiment "Experiment Name" %}
+    """
+    bits = token.split_contents()
+    if len(bits) == 2:
+        return GwoExperimentNode(bits[1])
+    else:
+        raise template.TemplateSyntaxError("%r should use the form {%% %r experimentname [as varname] %%}" % (bits[0], bits[0]))
+
+@register.tag
+def gwo_start_section(parser, token):
     try:
-        tag_name, gwo_exp = token.split_contents()
+        tag_name, gwo_section = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError, "%r tag requires a GWO experiment name" % token.contents.split()[0]
-    return GwoInclusionNode(template, gwo_exp)
+        raise template.TemplateSyntaxError, "%r tag requires a GWO section name" % token.contents.split()[0]
+    return GwoSectionNode(gwo_section, start=True)
 
 @register.tag
-def gwo_control_script(parser, token):
-    return gwo_generic_compiler(parser, token, "gwo/gwo_control_script.html")
-
-@register.tag
-def gwo_tracking_script(parser, token):
-    return gwo_generic_compiler(parser, token, "gwo/gwo_tracking_script.html")
-
-@register.tag
-def gwo_conversion_script(parser, token):
-    return gwo_generic_compiler(parser, token, "gwo/gwo_conversion_script.html")
+def gwo_end_section(parser, token):
+    try:
+        tag_name, gwo_section = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError, "%r tag requires a GWO section name" % token.contents.split()[0]
+    return GwoSectionNode(gwo_section, start=False)
