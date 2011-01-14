@@ -2,17 +2,11 @@ from django.db import models
 
 import settings
 
-EXPERIMENT_STATUSES = (
-    (1, 'New'),
-    (2, 'Running'), 
-    (3, 'Paused'), 
-    (4, 'Finished'),
-)
 AUTO_PRUNE_MODES = (
-    (0, 'None'),
-    (1, 'Conservative'),
-    (2, 'Normal'),
-    (3, 'Aggressive'),
+    ('None', 'None'),
+    ('Conservative', 'Conservative'),
+    ('Normal', 'Normal'),
+    ('Aggressive', 'Aggressive'),
 )
 
 
@@ -30,7 +24,7 @@ class GwoExperiment(models.Model):
     tracking_script = models.TextField(blank=True)
     conversion_script = models.TextField(blank=True)
     status = models.CharField(default='New', max_length=10, blank=True)
-    auto_prune_mode = models.IntegerField(choices=AUTO_PRUNE_MODES, default=0)
+    auto_prune_mode = models.CharField(choices=AUTO_PRUNE_MODES, max_length='15', default='None')
     test_url = models.URLField(
         verbose_name="Test page URL",
         verify_exists=False,
@@ -63,10 +57,11 @@ class GwoExperiment(models.Model):
         if self.experiment_id:
             exp = gwo_client.get_experiment(client.ExperimentQuery(self.experiment_id))
             exp.title.text = self.title
-            exp.auto_prune_mode.text = self.auto_prune_mode
+            # Google doesn't like it if we change the auto_prune_mode
+            # exp.auto_prune_mode.text = self.auto_prune_mode
             exp.update_test_link = self.test_url
             exp.update_goal_link = self.goal_url
-            gwo_client.update(exp, force=True)
+            exp = gwo_client.update(exp, force=True)
         else:
             exp = gwo_client.add_experiment(
                 exp_type=self.experiment_type, 
