@@ -81,7 +81,11 @@ def view_variations(obj):
     else:
         response.append('%s variations' % num_variations)
     admin_path = reverse("admin:gwo_gwovariation_changelist")
-    response.append('<a href="%s" class="linkbutton">View</a>' % admin_path)
+    response.append(''.join([
+        '<a href="%s' % admin_path,
+        '?gwo_experiment__id__exact=%s' % obj.gwo_experiment.id,
+        '&amp;gwo_section__id__exact=%s' % obj.id,
+        '" class="linkbutton">View</a>']))
     
     return "&nbsp;|&nbsp;".join(response)
 view_variations.allow_tags = True
