@@ -117,6 +117,8 @@ class GwoSection(models.Model):
         help_text="This is the ID assigned by Google Website Optimizer.",
     )
     title = models.CharField(max_length=100)
+    begin_script = models.CharField(blank=True, max_length=255)
+    end_script = models.CharField(blank=True, max_length=255)
     
     class Meta:
         pass
