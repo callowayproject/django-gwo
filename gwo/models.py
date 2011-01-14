@@ -71,6 +71,13 @@ class GwoExperiment(models.Model):
                 title=self.title,
             )
             self.experiment_id = exp.experiment_id.text
+        
+        self.control_script = exp.control_script.text
+        self.tracking_script = exp.tracking_script.text
+        self.conversion_script = exp.tracking_script.text
+        self.status = exp.status.text
+        # self.report_url = exp.report_url.text
+        # self.configuration_url = exp.configuration_url.text
     
     def save(self, *args, **kwargs):
         """
@@ -145,13 +152,15 @@ class GwoSection(models.Model):
             )
             sec = gwo_client.get_section(sec_qry)
             sec.title.text = self.title
-            gwo_client.update(sec, force=True)
+            sec = gwo_client.update(sec, force=True)
         else:
             sec = gwo_client.add_section(
                 self.gwo_experiment.experiment_id,  
                 title=self.title,
             )
-            self.section_id = sec.section_id.text
+        self.section_id = sec.section_id.text
+        self.begin_script = sec.section_begin_script.text
+        self.end_script = sec.section_end_script.text
     
     def save(self, *args, **kwargs):
         """
