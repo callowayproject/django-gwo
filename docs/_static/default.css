@@ -449,6 +449,9 @@ th {
     padding-right: 5px;
 }
 
+table.field-list {
+    border: 1px solid #919699;
+}
 /* -- other body styles ----------------------------------------------------- */
 
 dl {

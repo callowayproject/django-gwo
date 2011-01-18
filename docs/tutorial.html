@@ -57,6 +57,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#create-top-nav-alternate-variation">Create Top Nav Alternate Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-bottom-nav-original-variation">Create Bottom Nav Original Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instrumenting-the-links">Instrumenting the links</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
@@ -251,6 +252,44 @@
 <h2>Create Bottom Nav Alternate Variation<a class="headerlink" href="#create-bottom-nav-alternate-variation" title="Permalink to this headline">¶</a></h2>
 <p><strong>Title:</strong> <tt class="docutils literal"><span class="pre">Showing</span></tt></p>
 <p><strong>Content:</strong> <tt class="docutils literal"><span class="pre">&lt;p</span> <span class="pre">class=&quot;other_posts&quot;&gt;</span></tt></p>
+</div>
+<div class="section" id="instrumenting-the-links">
+<h2>Instrumenting the links<a class="headerlink" href="#instrumenting-the-links" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adding-the-script">
+<h3>Adding the script<a class="headerlink" href="#adding-the-script" title="Permalink to this headline">¶</a></h3>
+<p>To let Google Website Optimizer know that a conversion has occurred we need to  use a script. At the bottom of the template, just before the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></tt>, around line 70, add:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">trackclick_script</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">trackclick_script</span></tt> template tag renders the template <tt class="docutils literal"><span class="pre">gwo/trackclick_script.html</span></tt>, which a snippet of JavaScript that looks like:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;</span>
+<span class="x">function trackclick(that){</span>
+<span class="x">try {</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">conversion_script</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">        setTimeout(&#39;document.location = &quot;&#39; + that.href + &#39;&quot;&#39;, 100);</span>
+<span class="x">}catch(err){}</span>
+<span class="x">}&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">trackclick()</span></tt> function will change the location of the browser to the URL passed to it. The function also allows us to do a few things before it changes. The <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">conversion_script|safe</span> <span class="pre">}}</span></tt> variable is set to the appropriate pieces of the conversion script passed back to us from Google.</p>
+<p>The <tt class="docutils literal"><span class="pre">trackclick()</span></tt> function is designed to work regardless of whether there is currently an active experiment.</p>
+</div>
+<div class="section" id="modifying-the-tags">
+<h3>Modifying the tags<a class="headerlink" href="#modifying-the-tags" title="Permalink to this headline">¶</a></h3>
+<p>We need to call the <tt class="docutils literal"><span class="pre">trackclick</span></tt> script from each <tt class="docutils literal"><span class="pre">&lt;a&gt;</span></tt> tag that counts as a successful conversion. The template tag <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">trackclick</span> <span class="pre">%}</span></tt> renders <tt class="docutils literal"><span class="pre">gwo/trackclick.html</span></tt> which looks like:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">onclick=&quot;trackclick(this);return false;&quot;</span>
+</pre></div>
+</div>
+<p>By rendering a template, it allows you to add additional commands or functions easily.</p>
+<p>We need to modify the two sets of <tt class="docutils literal"><span class="pre">&lt;a&gt;</span></tt> tags by adding <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">trackclick</span> <span class="pre">%}</span></tt> within the tag. The first one is around line 16 and also around line 35:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;a class=&quot;previous&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">trackclick</span> <span class="cp">%}</span><span class="x"> title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View previous post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;&amp;laquo; </span><span class="cp">{{</span> <span class="nv">object.get_previous_by_publish</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>The next set is around line 19 and also around line 38:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">| &lt;a class=&quot;next&quot; href=&quot;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish.get_absolute_url</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">trackclick</span> <span class="cp">%}</span><span class="x"> title=&quot;</span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;View next post&quot;</span> <span class="cp">%}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">object.get_next_by_publish</span> <span class="cp">}}</span><span class="x"> &amp;raquo;&lt;/a&gt;</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

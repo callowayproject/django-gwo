@@ -147,3 +147,47 @@ Create Bottom Nav Alternate Variation
 **Title:** ``Showing``
 
 **Content:** ``<p class="other_posts">``
+
+
+Instrumenting the links
+=======================
+
+Adding the script
+*****************
+
+To let Google Website Optimizer know that a conversion has occurred we need to  use a script. At the bottom of the template, just before the ``{% endblock %}``\ , around line 70, add:: 
+
+	{% trackclick_script %}
+
+The ``trackclick_script`` template tag renders the template ``gwo/trackclick_script.html``\ , which a snippet of JavaScript that looks like::
+
+	<script type="text/javascript" charset="utf-8">
+	function trackclick(that){
+	try {
+		{{ conversion_script|safe }}
+		setTimeout('document.location = "' + that.href + '"', 100);
+	}catch(err){}
+	}</script>
+
+The ``trackclick()`` function will change the location of the browser to the URL passed to it. The function also allows us to do a few things before it changes. The ``{{ conversion_script|safe }}`` variable is set to the appropriate pieces of the conversion script passed back to us from Google.
+
+The ``trackclick()`` function is designed to work regardless of whether there is currently an active experiment.
+
+Modifying the tags
+******************
+
+We need to call the ``trackclick`` script from each ``<a>`` tag that counts as a successful conversion. The template tag ``{% trackclick %}`` renders ``gwo/trackclick.html`` which looks like::
+
+	onclick="trackclick(this);return false;"
+
+By rendering a template, it allows you to add additional commands or functions easily.
+
+We need to modify the two sets of ``<a>`` tags by adding ``{% trackclick %}`` within the tag. The first one is around line 16 and also around line 35::
+
+	<a class="previous" href="{{ object.get_previous_by_publish.get_absolute_url }}" {% trackclick %} title="{% trans "View previous post" %}">&laquo; {{ object.get_previous_by_publish }}</a>
+
+The next set is around line 19 and also around line 38::
+
+	| <a class="next" href="{{ object.get_next_by_publish.get_absolute_url }}" {% trackclick %} title="{% trans "View next post" %}">{{ object.get_next_by_publish }} &raquo;</a>
+    
+
