@@ -1,0 +1,18 @@
+{% if obj.status == 'New' or obj.status == 'Paused' %}
+	<form action="{{ obj.id }}/set_status/" id="start_{{ obj.id }}" method="post">
+		<input type="hidden" name="status" value="Running" id="status">
+		<a href="javascript:document.forms.start_{{ obj.id}}.submit()">{% if obj.status == 'Paused' %}Resume{% else %}Start{% endif %}</a>
+	</form>
+{% endif %}
+{% if obj.status == 'Running' %}
+	<form action="{{ obj.id }}/set_status/" id="pause_{{ obj.id }}" method="post">
+		<input type="hidden" name="status" value="Paused" id="status">
+		<a href="javascript:document.forms.pause_{{ obj.id}}.submit()">Pause</a>
+	</form>
+{% endif %}
+{% if obj.status == 'Running' or obj.status == 'Paused' %}
+	<form action="{{ obj.id }}/set_status/" id="stop_{{ obj.id }}" method="post">
+		<input type="hidden" name="status" value="Finished" id="status">
+		<a href="javascript:document.forms.stop_{{ obj.id}}.submit()">Finish</a>
+	</form>
+{% endif %}

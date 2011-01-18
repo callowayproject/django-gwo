@@ -1,0 +1,15 @@
+{% if obj.status == 'New' or obj.status == 'Paused' %}
+&nbsp;|&nbsp;
+<a href="{{ obj.id}}/set_status/?status=Running">{% if obj.status == 'Paused' %}Resume{% else %}Start{% endif %}</a>
+{% endif %}
+{% if obj.status == 'Paused' %}
+&nbsp;|&nbsp;
+{% endif %}
+{% if obj.status == 'Running' %}
+&nbsp;|&nbsp;
+<a href="{{ obj.id}}/set_status/?status=Paused">Pause</a>
+&nbsp;|&nbsp;
+{% endif %}
+{% if obj.status == 'Running' or obj.status == 'Paused' %}
+<a href="{{ obj.id}}/set_status/?status=Finish">Finish</a>
+{% endif %}

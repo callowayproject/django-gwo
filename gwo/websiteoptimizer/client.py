@@ -317,6 +317,28 @@ class WebsiteOptimizerClient(AnalyticsClient):
         exp.status.text = "Running"
         return self.update(exp, force=True)
     
+    def pause_experiment(self, feed_uri, **kwargs):
+        """
+        Pause an experiment
+        
+        :param feed_uri: The REST URI to get the feeds
+        :type feed_uri: ExperimentQuery
+        """
+        exp = self.get_experiment(feed_uri)
+        exp.status.text = "Paused"
+        return self.update(exp, force=True)
+    
+    def stop_experiment(self, feed_uri, **kwargs):
+        """
+        Stop an experiment
+        
+        :param feed_uri: The REST URI to get the feeds
+        :type feed_uri: ExperimentQuery
+        """
+        exp = self.get_experiment(feed_uri)
+        exp.status.text = "Finished"
+        return self.update(exp, force=True)
+    
     def get_sections(self, feed_uri, auth_token=None, **kwargs):
         """
         Get a section feed for an experiment.
