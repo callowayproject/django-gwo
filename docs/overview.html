@@ -22,7 +22,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
-    <link rel="next" title="Starting out" href="tutorial.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
   </head>
   <body>
@@ -36,7 +36,7 @@
 		<li id="page_buttons">
 			<div class="headerButton"><a href="genindex.html" title="General Index" accesskey="I">index</a></div>
 			<div class="headerButton"><a href="py-modindex.html" title="Python Module Index" >modules</a></div>
-			<div class="headerButton"><a href="tutorial.html" title="Starting out" accesskey="N">next</a></div>
+			<div class="headerButton"><a href="tutorial.html" title="Tutorial" accesskey="N">next</a></div>
 			<div class="headerButton"><a href="installation.html" title="Installation" accesskey="P">previous</a></div>
 		</li>
 	</ul>
@@ -47,14 +47,17 @@
 	<ul><li class="toctree-l1"><a href="index.html">Main Page</a></li></ul>
 	<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Multivariate testing of dynamic pages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Starting out</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-original-variation">Create Top Nav Original Variation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-top-nav-alternate-variation">Create Top Nav Alternate Variation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-original-variation">Create Bottom Nav Original Variation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Multivariate testing of dynamic pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#why-multivariate-instead-of-a-b">Why multivariate instead of A/B?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-testing-dynamic-pages-so-hard">Why is testing dynamic pages so hard?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-gwo-performs-a-test">How GWO performs a test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spoofing-the-conversion">Spoofing the conversion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management_commands.html">Management Commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
 </ul>
 
@@ -87,15 +90,56 @@
             
   <div class="section" id="multivariate-testing-of-dynamic-pages">
 <h1>Multivariate testing of dynamic pages<a class="headerlink" href="#multivariate-testing-of-dynamic-pages" title="Permalink to this headline">¶</a></h1>
-<p>Typically multivariate testing is testing multiple combinations of things on one page (the test URL), so see if they lead towards more readers getting to another page (the conversion URL). This falls apart when you want to test combinations of a template-driven site: the content and URL is variable, but the underlying template is constant. It really goes to hell when you don&#8217;t care which page they go to on your site, just that they go to another page.</p>
-<dl class="docutils">
-<dt><strong>Experiment</strong></dt>
+<div class="section" id="why-multivariate-instead-of-a-b">
+<h2>Why multivariate instead of A/B?<a class="headerlink" href="#why-multivariate-instead-of-a-b" title="Permalink to this headline">¶</a></h2>
+<p>A/B tests two or more entirely different pages. Google Website Optimizer does this by redirecting the user to different URLs. In many web frameworks, where the URLs are dynamically routed, this is just not practical.</p>
+</div>
+<div class="section" id="why-is-testing-dynamic-pages-so-hard">
+<h2>Why is testing dynamic pages so hard?<a class="headerlink" href="#why-is-testing-dynamic-pages-so-hard" title="Permalink to this headline">¶</a></h2>
+<p>Typically multivariate testing relies on two static URLs: a static URL for testing and a static URL for the conversion.</p>
+<p>Dynamic websites &#8211; websites with constantly changing content like blogs and news sites &#8211; can&#8217;t use this procedure because one URL isn&#8217;t <em>really</em> representative of the site. Every page which uses the underlying template is.</p>
+<p>Even static URLs won&#8217;t work if you have dynamic content on them. For example, if your home page has the most recent blog entries, you can&#8217;t test what makes more people go to any entry.</p>
+<div class="section" id="working-around-the-problem">
+<h3>Working around the problem<a class="headerlink" href="#working-around-the-problem" title="Permalink to this headline">¶</a></h3>
+<p>With Google Website Optimizer, there are ways to work around the typical testing workflow. It is trickier in that you still can&#8217;t test truly dynamic data, but you can test the static stuff <em>around</em> the dynamic data. First you have to understand how GWO tracks users, <a class="reference internal" href="#term-combination"><em class="xref std std-term">combination</em></a>s and <a class="reference internal" href="#term-conversion"><em class="xref std std-term">conversion</em></a>s.</p>
+</div>
+</div>
+<div class="section" id="how-gwo-performs-a-test">
+<h2>How GWO performs a test<a class="headerlink" href="#how-gwo-performs-a-test" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>The <a class="reference internal" href="#term-control-script"><em class="xref std std-term">control script</em></a> requests the dynamic file <tt class="docutils literal"><span class="pre">siteopt.js</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">siteopt.js</span></tt> checks cookies for a previously viewed combination or sets cookies to a specific combination and defines the <tt class="docutils literal"><span class="pre">utmx_section</span></tt> function for later use.</li>
+<li><tt class="docutils literal"><span class="pre">utmx_section</span></tt> function calls potentially replace the original HTML markup with either the previously viewed version, or a newly chosen version.</li>
+<li>The <a class="reference internal" href="#term-tracking-script"><em class="xref std std-term">tracking script</em></a> executes and registers the combination to GWO.</li>
+<li>The <a class="reference internal" href="#term-conversion-script"><em class="xref std std-term">conversion script</em></a> executes when a conversion occurs (traditionally on the conversion page).</li>
+</ol>
+<p>See also: <a class="reference external" href="http://static.googleusercontent.com/external_content/untrusted_dlcp/www.google.com/en/us/websiteoptimizer/techieguide.pdf">The Techie Guide to Google Website Optimizer</a></p>
+</div>
+<div class="section" id="spoofing-the-conversion">
+<h2>Spoofing the conversion<a class="headerlink" href="#spoofing-the-conversion" title="Permalink to this headline">¶</a></h2>
+<p>Since GWO uses a JavaScript function to signal a conversion, we are going to use the <tt class="docutils literal"><span class="pre">onclick</span></tt> methods on <tt class="docutils literal"><span class="pre">&lt;a&gt;</span></tt> tags to quickly register the conversion before sending the user on their way.</p>
+<div class="section" id="glossary">
+<h3>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h3>
+<dl class="glossary docutils">
+<dt id="term-combination">Combination</dt>
+<dd>A unique arrangement of one variation for each section.</dd>
+<dt id="term-control-script">Control Script</dt>
+<dd>The JavaScript code at the beginning of the page that requests <tt class="docutils literal"><span class="pre">siteopt.js</span></tt> and sets up the experiment.</dd>
+<dt id="term-conversion">Conversion</dt>
+<dd>A successful test.</dd>
+<dt id="term-conversion-script">Conversion Script</dt>
+<dd>The JavaScript code that registers a successful conversion and the combination to GWO.</dd>
+<dt id="term-experiment">Experiment</dt>
 <dd>The test.</dd>
-<dt><strong>Section</strong></dt>
+<dt id="term-section">Section</dt>
 <dd>Parts of the template which will vary. Google Website Optimizer uses JavaScript to insert the content into these areas, so make sure the parts that you are testing will allow JavaScript to fill it.</dd>
-<dt><strong>Variation</strong></dt>
+<dt id="term-tracking-script">Tracking Script</dt>
+<dd>The JavaScript code at the end of the page that submits the combination shown to the user back to GWO.</dd>
+<dt id="term-variation">Variation</dt>
 <dd>A bit of content for a section of an experiment. Google Website Optimizer fills this content into the section with JavaScript.</dd>
 </dl>
+</div>
+</div>
 </div>
 
 

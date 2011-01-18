@@ -189,5 +189,15 @@ We need to modify the two sets of ``<a>`` tags by adding ``{% trackclick %}`` wi
 The next set is around line 19 and also around line 38::
 
 	| <a class="next" href="{{ object.get_next_by_publish.get_absolute_url }}" {% trackclick %} title="{% trans "View next post" %}">{{ object.get_next_by_publish }} &raquo;</a>
-    
+
+Starting the experiment
+=======================
+
+Once everything is set up, you can start the experiment.
+
+#. Make sure all your template changes are deployed on your site
+
+#. In the admin, go to the GWO Experiment change list
+
+#. Click on ``Start`` in the Status field of this experiment
 
