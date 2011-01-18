@@ -26,8 +26,6 @@ class GwoSectionNode(template.Node):
             exp = context.get('gwo_experiment')
             section = exp.gwosection_set.get(title=section_name)
             if self.start:
-                print section
-                print section.begin_script
                 return section.begin_script
             else:
                 return section.end_script
@@ -46,7 +44,6 @@ class GwoExperimentNode(template.Node):
         except GwoExperiment.DoesNotExist:
             raise template.TemplateSyntaxError("Can't find experiment named %s" % exp_name)
         context['gwo_experiment'] = exp
-        print [d.keys() for d in context.dicts]
         return ''
 
 
