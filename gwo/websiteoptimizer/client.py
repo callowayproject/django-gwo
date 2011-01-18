@@ -306,6 +306,17 @@ class WebsiteOptimizerClient(AnalyticsClient):
         experiment = gwo_data.ExperimentEntry(**kwargs)
         return self.post(experiment, ExperimentQuery())
     
+    def start_experiment(self, feed_uri, **kwargs):
+        """
+        Start an experiment
+        
+        :param feed_uri: The REST URI to get the feeds
+        :type feed_uri: ExperimentQuery
+        """
+        exp = self.get_experiment(feed_uri)
+        exp.status.text = "Running"
+        return self.update(exp, force=True)
+    
     def get_sections(self, feed_uri, auth_token=None, **kwargs):
         """
         Get a section feed for an experiment.
