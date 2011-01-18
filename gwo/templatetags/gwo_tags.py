@@ -75,3 +75,20 @@ def gwo_end_section(parser, token):
     except ValueError:
         raise template.TemplateSyntaxError, "%r tag requires a GWO section name" % token.contents.split()[0]
     return GwoSectionNode(gwo_section, start=False)
+
+@register.inclusion_tag('gwo/trackclick_script.html', takes_context=True)
+def trackclick_script(context):
+    import re
+    regex = re.compile(r'(^try.+catch\(err\){})', re.MULTILINE|re.DOTALL)
+    exp = context.get('gwo_experiment', '')
+    if exp:
+        c_script = regex.search(exp.conversion_script).group(0)
+    else:
+        c_script = ''
+    return {
+        'conversion_script': c_script
+    }
+
+@register.inclusion_tag('gwo/trackclick.html')
+def trackclick():
+    return {}

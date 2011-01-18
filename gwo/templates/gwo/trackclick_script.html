@@ -1,8 +1,7 @@
 <script type="text/javascript" charset="utf-8">
 function trackclick(that){
 try {
-	var gwoTracker=_gat._getTracker("{{ gwo_google_account }}");
-	gwoTracker._trackPageview(document.location.href);
+	{{ conversion_script|safe }}
 	setTimeout('document.location = "' + that.href + '"', 100);
 }catch(err){}
 }</script>
