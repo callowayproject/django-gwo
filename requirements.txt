@@ -1,1 +1,1 @@
-gdata
+gdata==2.0.13

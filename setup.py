@@ -16,7 +16,7 @@ DESC = " ".join(__import__('gwo').__doc__.splitlines()).strip()
 setup(
     name = "django-gwo",
     version = __import__('gwo').get_version().replace(' ', '-'),
-    url = '',
+    url = 'https://github.com/washingtontimes/django-gwo',
     author = 'Corey Oordt',
     author_email = 'coordt@washingtontimes.com',
     description = DESC,
