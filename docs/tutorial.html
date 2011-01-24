@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial &mdash; django-gwo v0.1 documentation</title>
+    <title>Tutorial &mdash; django-gwo v0.2 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +21,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
+    <link rel="top" title="django-gwo v0.2 documentation" href="index.html" />
     <link rel="next" title="Getting Started" href="getting_started.html" />
     <link rel="prev" title="Multivariate testing of dynamic pages" href="overview.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>django-gwo v0.1 documentation</p>
+	<p>django-gwo v0.2 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Tutorial</h1></div>
@@ -59,6 +59,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#create-bottom-nav-alternate-variation">Create Bottom Nav Alternate Variation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#instrumenting-the-links">Instrumenting the links</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#starting-the-experiment">Starting the experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finishing-the-experiment">Finishing the experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating-the-templates">Updating the templates</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
@@ -300,6 +302,21 @@
 <li>In the admin, go to the GWO Experiment change list</li>
 <li>Click on <tt class="docutils literal"><span class="pre">Start</span></tt> in the Status field of this experiment</li>
 </ol>
+</div>
+<div class="section" id="finishing-the-experiment">
+<h2>Finishing the experiment<a class="headerlink" href="#finishing-the-experiment" title="Permalink to this headline">¶</a></h2>
+<p>After a period of time, Google Website Optimizer will inform you of their winning combination(s). You can stop the experiment.</p>
+<ol class="arabic simple">
+<li>Click on <tt class="docutils literal"><span class="pre">Stop</span></tt> next to the experiment&#8217;s <tt class="docutils literal"><span class="pre">Running</span></tt> status in the Django admin.</li>
+</ol>
+</div>
+<div class="section" id="updating-the-templates">
+<h2>Updating the templates<a class="headerlink" href="#updating-the-templates" title="Permalink to this headline">¶</a></h2>
+<p>There could be more templates than 1 (includes and stuff)</p>
+<p>Need the winning combination</p>
+<p>compile the test url template into the tree and look for start and stop tags for sections and hopefully/possibly the file in which they reside</p>
+<p>Parse each template and remove the sections and substitute the winning variation</p>
+<p>print the output to a file/files to replace the existing templates</p>
 </div>
 </div>
 

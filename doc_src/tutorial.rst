@@ -201,3 +201,24 @@ Once everything is set up, you can start the experiment.
 
 #. Click on ``Start`` in the Status field of this experiment
 
+Finishing the experiment
+========================
+
+After a period of time, Google Website Optimizer will inform you of their winning combination(s). You can stop the experiment.
+
+#. Click on ``Stop`` next to the experiment's ``Running`` status in the Django admin.
+
+
+Updating the templates
+======================
+
+There could be more templates than 1 (includes and stuff)
+
+Need the winning combination
+
+compile the test url template into the tree and look for start and stop tags for sections and hopefully/possibly the file in which they reside
+
+Parse each template and remove the sections and substitute the winning variation
+
+print the output to a file/files to replace the existing templates
+

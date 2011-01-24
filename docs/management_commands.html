@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Management Commands &mdash; django-gwo v0.1 documentation</title>
+    <title>Management Commands &mdash; django-gwo v0.2 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +21,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="django-gwo v0.1 documentation" href="index.html" />
+    <link rel="top" title="django-gwo v0.2 documentation" href="index.html" />
     <link rel="next" title="Reference" href="reference/index.html" />
     <link rel="prev" title="Using the weboptimizer gdata Extension" href="using_gwoweboptimizer.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>django-gwo v0.1 documentation</p>
+	<p>django-gwo v0.2 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Management Commands</h1></div>
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Management Commands</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pull-from-gwo">pull_from_gwo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-variation">generate_variation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a></li>
@@ -104,6 +105,39 @@ Pulling experiments from Google Website Optimizer
    Building variation Original
    Building variation Showing
 Done.</pre>
+</div>
+</div>
+<div class="section" id="generate-variation">
+<h2>generate_variation<a class="headerlink" href="#generate-variation" title="Permalink to this headline">¶</a></h2>
+<p>Prints to the console a template with sections replaced with the variation specified in the combination. This makes it easier to recreate the template(s) after the experiment is finished.</p>
+<p>This management command needs the template name and the combination number:</p>
+<div class="highlight-python"><pre>$ ./manage.py generate_variation blog/post_detail.html 5</pre>
+</div>
+<p>and you can put the output to a file by:</p>
+<div class="highlight-python"><pre>$ ./manage.py generate_variation blog/post_detail.html 5 &gt; post_detail.html</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">generate_variation</span></tt> then requests the combination from Google Website Optimizer. The combination specifies which variation to use with each section. For example, if you had a section in your template specified as:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">set_experiment</span> <span class="s2">&quot;Example Experiment&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">gwo_experiment.control_script</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">  &lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}</span><span class="x">&lt;/h2&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">gwo_start_section</span> <span class="s2">&quot;Top Nav&quot;</span> <span class="cp">%}</span><span class="x">&lt;p class=&quot;other_posts&quot;&gt;</span><span class="cp">{%</span> <span class="k">gwo_end_section</span> <span class="s2">&quot;Top Nav&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>depending on the combination specified, the results could look like:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">object.title</span> <span class="cp">}}</span><span class="x">&lt;/h2&gt;</span>
+<span class="x">&lt;p class=&quot;other_posts&quot; style=&quot;display: None&quot;&gt;</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">set_experiment</span> <span class="pre">%}</span></tt> tag and <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">gwo_experiment</span> <span class="pre">}}</span></tt> variables are gone, the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_start_section</span> <span class="pre">%}</span></tt> and <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">gwo_stop_section</span> <span class="pre">%}</span></tt> tags are gone, and the contents between them is the value of the variation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Included templates are not touched.</strong></p>
+<p class="last">If your experiment included markup on templates that were included with the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">include</span> <span class="pre">%}</span></tt> tag, this command does not look at them.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>track_click tags are not removed.</strong></p>
+<p class="last">The track_click scripts will work fine without an experiment running. It also saves on adding them back in if a follow-up experiment is run.</p>
 </div>
 </div>
 </div>
