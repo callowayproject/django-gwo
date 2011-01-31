@@ -1,6 +1,6 @@
 from django import template
 import settings
-from gwo.models import GwoExperiment
+from gwo.models import GwoExperiment, GwoSection
 
 register = template.Library()
 
