@@ -58,7 +58,7 @@ def set_experiment(parser, token):
     if len(bits) == 2:
         return GwoExperimentNode(bits[1])
     else:
-        raise template.TemplateSyntaxError("%r should use the form {%% %r experimentname [as varname] %%}" % (bits[0], bits[0]))
+        raise template.TemplateSyntaxError("%r should use the form {%% %r experimentname %%}" % (bits[0], bits[0]))
 
 @register.tag
 def gwo_start_section(parser, token):
