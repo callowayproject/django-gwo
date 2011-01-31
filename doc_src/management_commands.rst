@@ -5,7 +5,7 @@ Management Commands
 pull_from_gwo
 =============
 
-Updates the data with the data from Google Website Optimizer. Local versions are deleted and recreated.
+Updates the data with the data from Google Website Optimizer.
 
 ::
 

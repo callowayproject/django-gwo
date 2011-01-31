@@ -16,3 +16,5 @@ or
 
 Dependencies
 ************
+
+gdata version 2.0.13
