@@ -238,5 +238,18 @@ class GwoVariation(models.Model):
         if not kwargs.pop('local_only', False):
             self._sync_gwo_variation()
         super(GwoVariation, self).save(*args, **kwargs)
+
+def handle_delete(sender, instance, **kwargs):
+    """
+    Send out a delete to GWO
+    """
+    from websiteoptimizer import client
+    gwo_client = client.WebsiteOptimizerClient()
+    gwo_client.ClientLogin(settings.GWO_USER, settings.GWO_PASSWORD, 'django-gwo')
     
-        
+    gwo_client.delete(instance.gwo_url)
+
+# from django.db.models.signals import pre_delete
+# pre_delete.connect(handle_delete, sender=GwoExperiment)
+# pre_delete.connect(handle_delete, sender=GwoSection)
+# pre_delete.connect(handle_delete, sender=GwoVariation)
