@@ -1,122 +1,49 @@
 from django.test import TestCase
+from django.conf import settings
 
+from models import GwoExperiment, GwoSection, GwoVariation
+from websiteoptimizer import client
 
 class gwoTest(TestCase):
     """
     Tests for django-gwo
     """
-    def test_gwoExperimentForm(self):
-        """
-        Make sure the various validations work correctly
-        """
-        from forms import GwoExperimentForm
-        from django.template.loader import render_to_string
-        
-        test_data = {
-            'slug': 'test_1',
-            'experiment_id': '',
-            'control_script': render_to_string(
-                'gwo/gwo_control_script.html', 
-                {'experiment': {'experiment_id': 123456}}),
-            'tracking_script': render_to_string(
-                'gwo/gwo_tracking_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            ),
-            'conversion_script': render_to_string(
-                'gwo/gwo_conversion_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            )
+    experiment = {
+        'title': 'TestExperiment',
+        'experiment_type': 'Multivariate',
+        'test_url': 'http://www.example.com/test',
+        'goal_url': 'http://www.example.com/goal',
+    }
+    sections = [{'title':'Section 1'},]
+    variations = [
+        {
+            'title': 'Original',
+            'content': '<div>'
+        },{
+            'title': 'Variation 1',
+            'content': '<div class="hide">'
         }
-        
-        gwoform = GwoExperimentForm(test_data)
-        self.assertTrue(gwoform.is_valid())
-        self.assertEqual(gwoform.cleaned_data['experiment_id'], '123456')
-        
-        test_data = {
-            'slug': 'test_2',
-            'experiment_id': '',
-            'control_script': render_to_string(
-                'gwo/gwo_control_script.html', 
-                {'experiment': {'experiment_id': 123456}}),
-            'tracking_script': render_to_string(
-                'gwo/gwo_tracking_script.html',
-                {'experiment': {'experiment_id': 12345, 'gwo_account': 654321}}
-            ),
-            'conversion_script': render_to_string(
-                'gwo/gwo_conversion_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            )
-        }
-        gwoform = GwoExperimentForm(test_data)
-        self.assertFalse(gwoform.is_valid())
-        
-        test_data = {
-            'slug': 'test_3',
-            'experiment_id': '',
-            'control_script': render_to_string(
-                'gwo/gwo_control_script.html', 
-                {'experiment': {'experiment_id': 12345}}),
-            'tracking_script': render_to_string(
-                'gwo/gwo_tracking_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            ),
-            'conversion_script': render_to_string(
-                'gwo/gwo_conversion_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            )
-        }
-        
-        gwoform = GwoExperimentForm(test_data)
-        self.assertFalse(gwoform.is_valid())
-        
-        test_data = {
-            'slug': 'test_4',
-            'experiment_id': '',
-            'control_script': render_to_string(
-                'gwo/gwo_control_script.html', 
-                {'experiment': {'experiment_id': 123456}}),
-            'tracking_script': render_to_string(
-                'gwo/gwo_tracking_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            ),
-            'conversion_script': render_to_string(
-                'gwo/gwo_conversion_script.html',
-                {'experiment': {'experiment_id': 123455, 'gwo_account': 654321}}
-            )
-        }
-        
-        gwoform = GwoExperimentForm(test_data)
-        self.assertFalse(gwoform.is_valid())
+    ]
+    def _get_client(self):
+        if not hasattr(self, 'gwo_client'):
+            self.gwo_client = client.WebsiteOptimizerClient()
+            self.gwo_client.ClientLogin(settings.GWO_USER, settings.GWO_PASSWORD, 'django-gwo')
+        return self.gwo_client
     
-    def test_TemplateTags(self):
-        """
-        Make sure the template tags work as expected
-        """
-        from forms import GwoExperimentForm
-        from models import GwoExperiment
-        from django.template.loader import render_to_string
-        from django.template import Template, Context
+    def testCreationDeletion(self):
+        exp = GwoExperiment.objects.create(**self.experiment)
         
-        test_data = {
-            'slug': 'test_1',
-            'experiment_id': '',
-            'control_script': render_to_string(
-                'gwo/gwo_control_script.html', 
-                {'experiment': {'experiment_id': 123456}}),
-            'tracking_script': render_to_string(
-                'gwo/gwo_tracking_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            ),
-            'conversion_script': render_to_string(
-                'gwo/gwo_conversion_script.html',
-                {'experiment': {'experiment_id': 123456, 'gwo_account': 654321}}
-            )
-        }
+        assert(exp.experiment_id is not None)
         
-        gwoform = GwoExperimentForm(test_data)
-        self.assertTrue(gwoform.is_valid())
-        gwo = gwoform.save()
+        for section in self.sections:
+            GwoSection.objects.create(gwo_experiment=exp, **section)
         
-        tmpl = "{% load gwo_tags %}{% gwo_control_script test_1 %}"
-        print Template(tmpl).render(Context({}))
+        sections = exp.gwosection_set.all()
+        for section in sections:
+            for variation in self.variations:
+                GwoVariation.objects.create(gwo_section=section, gwo_experiment=exp, **variation)
+        url = exp.gwo_url
+        v_exp = self._get_client().get_experiment(exp.gwo_url)
+        exp.delete()
+        v_exp = self._get_client().get_experiment(url)
         
