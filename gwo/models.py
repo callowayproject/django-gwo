@@ -46,6 +46,14 @@ class GwoExperiment(models.Model):
     def __unicode__(self):
         return self.title
     
+    @property
+    def gwo_url(self):
+        """
+        Return the URL represented by the GwoExperimentQuery
+        """
+        from websiteoptimizer import client
+        return client.ExperimentQuery(self.experiment_id)
+    
     def _sync_gwo_experiment(self):
         """
         Automatically called by the save method
@@ -55,7 +63,7 @@ class GwoExperiment(models.Model):
         gwo_client.ClientLogin(settings.GWO_USER, settings.GWO_PASSWORD, 'django-gwo')
         
         if self.experiment_id:
-            exp = gwo_client.get_experiment(client.ExperimentQuery(self.experiment_id))
+            exp = gwo_client.get_experiment(self.gwo_url)
             exp.title.text = self.title
             # Google doesn't like it if we change the auto_prune_mode
             # exp.auto_prune_mode.text = self.auto_prune_mode
@@ -137,20 +145,29 @@ class GwoSection(models.Model):
     def __unicode__(self):
         return u"%s Section: %s" % (self.gwo_experiment, self.title)
     
+    @property
+    def gwo_url(self):
+        """
+        Return the URL represented by the GwoExperimentQuery
+        """
+        from websiteoptimizer import client
+        return client.SectionQuery(
+            self.gwo_experiment.experiment_id, 
+            self.section_id
+        )
+    
     def _sync_gwo_section(self):
         """
         Automatically called by the save method
         """
+        if self.gwo_experiment is None:
+            return
         from websiteoptimizer import client
         gwo_client = client.WebsiteOptimizerClient()
         gwo_client.ClientLogin(settings.GWO_USER, settings.GWO_PASSWORD, 'django-gwo')
         
         if self.section_id:
-            sec_qry = client.SectionQuery(
-                self.gwo_experiment.experiment_id, 
-                self.section_id
-            )
-            sec = gwo_client.get_section(sec_qry)
+            sec = gwo_client.get_section(self.gwo_url)
             sec.title.text = self.title
             sec = gwo_client.update(sec, force=True)
         else:
@@ -195,6 +212,18 @@ class GwoVariation(models.Model):
     def __unicode__(self):
         return u"%s Variation: %s" % (self.gwo_section, self.title)
     
+    @property
+    def gwo_url(self):
+        """
+        Return the URL represented by the GwoExperimentQuery
+        """
+        from websiteoptimizer import client
+        return client.VariationQuery(
+            self.gwo_experiment.experiment_id, 
+            self.gwo_section.section_id,
+            self.variation_id
+        )
+    
     def _sync_gwo_variation(self):
         """
         Automatically called by the save method
@@ -204,22 +233,13 @@ class GwoVariation(models.Model):
         gwo_client.ClientLogin(settings.GWO_USER, settings.GWO_PASSWORD, 'django-gwo')
         
         if self.variation_id:
-            var_qry = client.VariationQuery(
-                self.gwo_experiment.experiment_id, 
-                self.gwo_section.section_id,
-                self.variation_id
-            )
-            var = gwo_client.get_variation(var_qry)
+            var = gwo_client.get_variation(self.gwo_url)
             var.title.text = self.title
             var.content.text = self.content
             gwo_client.update(var, force=True)
         else:
-            sec_qry = client.SectionQuery(
-                self.gwo_experiment.experiment_id, 
-                self.gwo_section.section_id
-            )
             var = gwo_client.add_variation(
-                sec_qry,  
+                self.gwo_section.gwo_url,  
                 title=self.title,
                 content=self.content
             )
