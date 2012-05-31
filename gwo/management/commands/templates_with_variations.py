@@ -2,7 +2,7 @@ import re
 
 from django.core.management.base import BaseCommand, CommandError
 from django.template import BLOCK_TAG_START, BLOCK_TAG_END
-from django.template.loader import find_template
+from django.template.loader import find_template, TemplateDoesNotExist
 
 from generate_variation import TAG_RE
 
@@ -52,7 +52,10 @@ class Command(BaseCommand):
         flagged_tmpls = []
         
         for template_name in tmpl_list:
-            tmpl, origin = find_template(template_name)
+            try:
+                tmpl, origin = find_template(template_name)
+            except TemplateDoesNotExist:
+                continue
             if self.has_gwo_tags(tmpl):
                 flagged_tmpls.append(template_name)
             
