@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial &mdash; django-gwo v0.3 documentation</title>
+    <title>Tutorial &mdash; django-gwo v0.4 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +21,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="django-gwo v0.3 documentation" href="index.html" />
+    <link rel="top" title="django-gwo v0.4 documentation" href="index.html" />
     <link rel="next" title="Getting Started" href="getting_started.html" />
     <link rel="prev" title="Multivariate testing of dynamic pages" href="overview.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>django-gwo v0.3 documentation</p>
+	<p>django-gwo v0.4 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Tutorial</h1></div>
@@ -312,11 +312,39 @@
 </div>
 <div class="section" id="updating-the-templates">
 <h2>Updating the templates<a class="headerlink" href="#updating-the-templates" title="Permalink to this headline">¶</a></h2>
-<p>There could be more templates than 1 (includes and stuff)</p>
-<p>Need the winning combination</p>
-<p>compile the test url template into the tree and look for start and stop tags for sections and hopefully/possibly the file in which they reside</p>
-<p>Parse each template and remove the sections and substitute the winning variation</p>
-<p>print the output to a file/files to replace the existing templates</p>
+<div class="section" id="which-templates-did-i-modify">
+<h3>Which templates did I modify?<a class="headerlink" href="#which-templates-did-i-modify" title="Permalink to this headline">¶</a></h3>
+<p>Once the experiment has run its course and you have the winning combination, you need to implement that combination within the templates and strip out all the Django-GWO template tags. To make it even more fun, there could be more than one template if you have several included templates.</p>
+<p>Management commands to the rescue!</p>
+<p>To discover the templates that have tags and thus require changing, run the <a class="reference internal" href="management_commands.html#templates-with-variations"><em>templates_with_variations</em></a> command. The output will look something like this:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">$ ./management.py templates_with_variations blog/post_detail.html</span>
+
+<span class="x">Templates with variation tags:</span>
+<span class="x">------------------------------</span>
+<span class="x">blog/post_detail.html</span>
+</pre></div>
+</div>
+<p>The example project has a template with includes called <tt class="docutils literal"><span class="pre">post_detail.final.inc.html</span></tt> which outputs:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">$ ./management.py templates_with_variations blog/post_detail.final.inc.html</span>
+
+<span class="x">Templates with variation tags:</span>
+<span class="x">------------------------------</span>
+<span class="x">blog/post_detail.html</span>
+<span class="x">blog/top_nav.html</span>
+<span class="x">blog/top_nav.html</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="making-the-substitution">
+<h3>Making the substitution<a class="headerlink" href="#making-the-substitution" title="Permalink to this headline">¶</a></h3>
+<p>You now need to run each template returned from <a class="reference internal" href="management_commands.html#templates-with-variations"><em>templates_with_variations</em></a> command through <a class="reference internal" href="management_commands.html#generate-variation"><em>generate_variation</em></a>. This command takes a template name and a combination number (the winning combination from Google Website Optimizer) and prints the template with Django-GWO tags stripped and proper variation substituted to the screen.</p>
+<p>Why to the screen? Two reasons. Django-GWO doesn&#8217;t take for granted that you want to change the original file, and it is incredibly easy to redirect the output to a file of your choosing.</p>
+<p>The command:</p>
+<div class="highlight-django"><div class="highlight"><pre><span class="x">$ ./manage.py generate_variation blog/post_detail.html 5 &gt; post_detail.html</span>
+</pre></div>
+</div>
+<p>will create a file called <tt class="docutils literal"><span class="pre">post_detail.html</span></tt> in the project folder with the substitutions. You can test it, modify it, or simply replace the old template with it.</p>
+</div>
 </div>
 </div>
 

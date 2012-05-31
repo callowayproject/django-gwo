@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Management Commands &mdash; django-gwo v0.3 documentation</title>
+    <title>Management Commands &mdash; django-gwo v0.4 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3',
+        VERSION:     '0.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -21,13 +21,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="django-gwo v0.3 documentation" href="index.html" />
+    <link rel="top" title="django-gwo v0.4 documentation" href="index.html" />
     <link rel="next" title="Reference" href="reference/index.html" />
     <link rel="prev" title="Using the weboptimizer gdata Extension" href="using_gwoweboptimizer.html" /> 
   </head>
   <body>
 <div id="docstitle">
-	<p>django-gwo v0.3 documentation</p>
+	<p>django-gwo v0.4 documentation</p>
 </div>
 <div id="header">
 	<div id="title"><h1>Management Commands</h1></div>
@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="using_gwoweboptimizer.html">Using the weboptimizer gdata Extension</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Management Commands</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pull-from-gwo">pull_from_gwo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#templates-with-variations">templates_with_variations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-variation">generate_variation</a></li>
 </ul>
 </li>
@@ -89,7 +90,7 @@
   <div class="section" id="management-commands">
 <h1>Management Commands<a class="headerlink" href="#management-commands" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="pull-from-gwo">
-<h2>pull_from_gwo<a class="headerlink" href="#pull-from-gwo" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>pull_from_gwo<a class="headerlink" href="#pull-from-gwo" title="Permalink to this headline">¶</a></h2>
 <p>Updates the data with the data from Google Website Optimizer.</p>
 <div class="highlight-python"><pre>$ ./manage.py pull_from_gwo
 Purging local experiments
@@ -107,8 +108,22 @@ Pulling experiments from Google Website Optimizer
 Done.</pre>
 </div>
 </div>
+<div class="section" id="templates-with-variations">
+<span id="id2"></span><h2>templates_with_variations<a class="headerlink" href="#templates-with-variations" title="Permalink to this headline">¶</a></h2>
+<p>Given a template name, it will drill down through all included templates and return all the templates that have Django-GWO tags within them.</p>
+<p>This command only needs the template name:</p>
+<div class="highlight-python"><pre>$ ./manage.py templates_with_variations blog/post_detail.html
+
+Templates with variation tags:
+------------------------------
+blog/post_detail.html
+blog/top_nav.html
+blog/top_nav.html</pre>
+</div>
+<p>This command is handy to use before using <tt class="docutils literal"><span class="pre">generate_variation</span></tt>, so you know all the templates that require processing for variations.</p>
+</div>
 <div class="section" id="generate-variation">
-<h2>generate_variation<a class="headerlink" href="#generate-variation" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>generate_variation<a class="headerlink" href="#generate-variation" title="Permalink to this headline">¶</a></h2>
 <p>Prints to the console a template with sections replaced with the variation specified in the combination. This makes it easier to recreate the template(s) after the experiment is finished.</p>
 <p>This management command needs the template name and the combination number:</p>
 <div class="highlight-python"><pre>$ ./manage.py generate_variation blog/post_detail.html 5</pre>

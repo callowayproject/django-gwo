@@ -1,0 +1,9 @@
+{% set_experiment "Example Experiment" %}
+{% gwo_start_section "Bottom Nav" %}<p class="other_posts" style="display:None">{% gwo_end_section "Bottom Nav" %}
+  {% if object.get_previous_by_publish %}
+  <a class="previous" href="{{ object.get_previous_by_publish.get_absolute_url }}" title="{% trans "View previous post" %}">&laquo; {{ object.get_previous_by_publish }}</a>
+  {% endif %}
+  {% if object.get_next_by_publish %}
+  | <a class="next" href="{{ object.get_next_by_publish.get_absolute_url }}" title="{% trans "View next post" %}">{{ object.get_next_by_publish }} &raquo;</a>
+  {% endif %}
+</p>

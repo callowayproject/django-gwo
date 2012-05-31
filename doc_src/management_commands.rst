@@ -2,6 +2,8 @@
 Management Commands
 ===================
 
+.. _pull_from_gwo:
+
 pull_from_gwo
 =============
 
@@ -24,6 +26,26 @@ Updates the data with the data from Google Website Optimizer.
 	   Building variation Showing
 	Done.
 
+.. _templates_with_variations:
+
+templates_with_variations
+=========================
+
+Given a template name, it will drill down through all included templates and return all the templates that have Django-GWO tags within them.
+
+This command only needs the template name::
+
+	$ ./manage.py templates_with_variations blog/post_detail.html
+	
+	Templates with variation tags:
+	------------------------------
+	blog/post_detail.html
+	blog/top_nav.html
+	blog/top_nav.html
+
+This command is handy to use before using ``generate_variation``\ , so you know all the templates that require processing for variations.
+
+.. _generate_variation:
 
 generate_variation
 ==================

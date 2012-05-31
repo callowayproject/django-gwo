@@ -212,13 +212,40 @@ After a period of time, Google Website Optimizer will inform you of their winnin
 Updating the templates
 ======================
 
-There could be more templates than 1 (includes and stuff)
+Which templates did I modify?
+*****************************
 
-Need the winning combination
+Once the experiment has run its course and you have the winning combination, you need to implement that combination within the templates and strip out all the Django-GWO template tags. To make it even more fun, there could be more than one template if you have several included templates.
 
-compile the test url template into the tree and look for start and stop tags for sections and hopefully/possibly the file in which they reside
+Management commands to the rescue!
 
-Parse each template and remove the sections and substitute the winning variation
+To discover the templates that have tags and thus require changing, run the :ref:`templates_with_variations` command. The output will look something like this::
 
-print the output to a file/files to replace the existing templates
+	$ ./management.py templates_with_variations blog/post_detail.html
+	
+	Templates with variation tags:
+	------------------------------
+	blog/post_detail.html
 
+The example project has a template with includes called ``post_detail.final.inc.html`` which outputs::
+
+	$ ./management.py templates_with_variations blog/post_detail.final.inc.html
+
+	Templates with variation tags:
+	------------------------------
+	blog/post_detail.html
+	blog/top_nav.html
+	blog/top_nav.html
+
+Making the substitution
+***********************
+
+You now need to run each template returned from :ref:`templates_with_variations` command through :ref:`generate_variation`\ . This command takes a template name and a combination number (the winning combination from Google Website Optimizer) and prints the template with Django-GWO tags stripped and proper variation substituted to the screen.
+
+Why to the screen? Two reasons. Django-GWO doesn't take for granted that you want to change the original file, and it is incredibly easy to redirect the output to a file of your choosing.
+
+The command::
+
+	$ ./manage.py generate_variation blog/post_detail.html 5 > post_detail.html
+
+will create a file called ``post_detail.html`` in the project folder with the substitutions. You can test it, modify it, or simply replace the old template with it.
